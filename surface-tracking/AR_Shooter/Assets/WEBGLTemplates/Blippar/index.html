@@ -1,0 +1,111 @@
+  <!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>{{{ PRODUCT_NAME }}}</title>
+    <link rel="shortcut icon" href="TemplateData/favicon.ico">
+    <link rel="stylesheet" href="TemplateData/style.css">
+
+<script src = blippar-webar-sdk.....
+webar-mode="surface-tracking"
+    auto-start="false"
+    auto-init="true"
+    auto-marker-detection="true"
+show-guide-animation-url=""
+
+    rendering-engine="unity"
+logo-src="images/test_logo_here.png"
+logo-height="116px"
+progress-dot-ring-scale="0.30"
+progress-dot-ring-color="#00AAFF"
+progress-ring-scale="0.36"
+progress-ring-color="#00FFFF"
+progress-ring-line-width="5"
+
+alert-border-color="#00FFFF"
+alert-border-width="5px"
+alert-background-color="#283747"
+alert-message-text-color="#00AAFF"
+alert-button-color="#00FFFF"
+alert-button-text-color="#283747"
+alert-button-height="50px"
+alert-camera-permission-text="We need to ask for access to the camera so this experience can work!!!"
+alert-camera-permission-button-text="No Problem"
+alert-motion-permission-text="Now we need access to motion sensors!!!"
+alert-motion-permission-button-text="No Problem"
+    
+ui-background-color="#283747"
+ui-text-color="#00FFFF"
+desktop-logo-src="images/test_desktop_logo.png"
+desktop-logo-width="108px"
+desktop-logo-height="30px"
+issue-img-src="images/test_issue_img.png"
+issue-img-width="116px"
+issue-img-height="116px"
+    show-guide-view="true"></script>
+
+  </head>
+  <body class="{{{ SPLASH_SCREEN_STYLE.toLowerCase() }}}">
+      <div id="unity-container" class="unity-desktop">
+        <canvas id="unity-canvas" style="position: absolute;"></canvas>
+      </div>
+<script>
+
+var Yrotvalue = undefined;
+var UNITYINSTANCE = undefined;
+const cameraObjectName = "";
+const stageObjectName = "";
+      const buildUrl = "Build";
+      const loaderUrl = buildUrl + "/{{{ LOADER_FILENAME }}}";
+      const config = {
+        dataUrl: buildUrl + "/{{{ DATA_FILENAME }}}",
+        frameworkUrl: buildUrl + "/{{{ FRAMEWORK_FILENAME }}}",
+        codeUrl: buildUrl + "/{{{ CODE_FILENAME }}}",
+#if MEMORY_FILENAME
+        memoryUrl: buildUrl + "/{{{ MEMORY_FILENAME }}}",
+#endif
+#if SYMBOLS_FILENAME
+        symbolsUrl: buildUrl + "/{{{ SYMBOLS_FILENAME }}}",
+#endif
+        streamingAssetsUrl: "StreamingAssets",
+        companyName: "{{{ COMPANY_NAME }}}",
+        productName: "{{{ PRODUCT_NAME }}}",
+        productVersion: "{{{ PRODUCT_VERSION }}}",
+      };
+
+      const container = document.querySelector("#unity-container");
+      const canvas = document.querySelector("#unity-canvas");
+
+      if (/iPhone|iPad|iPod|Android/i.test(navigator.userAgent)) {
+        container.className = "unity-mobile";
+        config.devicePixelRatio = 1;
+      }
+#if BACKGROUND_FILENAME
+      canvas.style.background = "url('" + buildUrl + "/{{{ BACKGROUND_FILENAME.replace(/'/g, '%27') }}}') center / cover";
+#endif
+
+      const script = document.createElement("script");
+      script.src = loaderUrl;
+      script.onload = () => {
+        createUnityInstance(canvas, config, (progress) => {
+
+        }).then((unityInstance) => {
+          UNITYINSTANCE  = unityInstance;
+          //console.log("Web AR Call : " + "cameraName- " + blipparCameraName + " " + "stageName- " + blipparStageName + " " + "blipparCanvas- " + canvas.id);
+        }).catch((message) => {
+          alert(message);
+        });
+      };
+
+      //WEBAR SDK INIT function 
+      document.body.appendChild(script);
+	    function GetCommand(str){
+		        Yrotvalue=(str);
+        }
+
+	    WEBARSDK.InitUnityWebGL(canvas.id, cameraObjectName, stageObjectName);
+      </script>
+  </body>
+</html>
