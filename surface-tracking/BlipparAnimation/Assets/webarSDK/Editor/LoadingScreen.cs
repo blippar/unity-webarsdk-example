@@ -21,6 +21,7 @@ public class LoadingScreen : EditorWindow
     int index;
     int lastIndex = -1;
     private List<string> list = new List<string>();
+    private List<string> tempList;
     private Texture2D b_Logo = null;
     private Texture2D button_tex;
     private GUIContent button_tex_con;
@@ -149,12 +150,32 @@ public class LoadingScreen : EditorWindow
 
         button_tex = (Texture2D)Resources.Load("Refresh", typeof(Texture2D));
         button_tex_con = new GUIContent(button_tex);
+
+        readCustomFile();
+        if (loadingData != null)
+        {
+            index = loadingData._selectedIndex;
+        }
     }
 
     private void Update()
     {
         //CreateFile();
         //WriteFile();
+    }
+
+    private int GetSelectedIndex(string tempName)
+    {
+        tempList = GetTemplateFiles();
+        for (int i = 0; i < tempList.Count; i++)
+        {
+            string tmpName = tempList[i];
+            if (tmpName == tempName)
+            {
+                return i;
+            }
+        }
+        return 0;
     }
 
     public List<String> GetTemplateFiles()
@@ -206,6 +227,7 @@ public class LoadingScreen : EditorWindow
             readCustomFile();
             loadingData._selectedTemplate = _selectedTemplate;
             loadingData._selectedAnimURL = _trackingAnimURL;
+            loadingData._selectedIndex = index;
             writeCustomFile();
             if (lastIndex != index)
             {
@@ -434,6 +456,13 @@ public class LoadingScreen : EditorWindow
         GUILayout.Label("", /*EditorStyles.boldLabel,*/ GUILayout.MaxWidth(216));
         if (GUILayout.Button("Save as a new Template"))
         {
+            if (File.Exists("Assets/webarSDK/Editor/LoadingScreenTemplates/" + _templateName + ".json"))
+            {
+                EditorUtility.DisplayDialog("Warning", "File name already exist, Please select different name", "ok");
+                GUILayout.EndHorizontal();
+                return;
+            }
+
             if (_templateName == "")
             {
                 EditorUtility.DisplayDialog("Warning", "Please enter a name", "ok");
@@ -453,6 +482,13 @@ public class LoadingScreen : EditorWindow
                     _templateName = "";
                     ReadSelectedFile();
                     StoreTempData();
+
+                    //loadingData._selectedTemplate = _selectedTemplate;
+                    //loadingData._selectedAnimURL = _trackingAnimURL;
+                    //loadingData._selectedIndex = GetSelectedIndex(_selectedTemplate);
+                    //writeCustomFile();
+
+                    index = GetSelectedIndex(_selectedTemplate);
                 }
                 else
                 {

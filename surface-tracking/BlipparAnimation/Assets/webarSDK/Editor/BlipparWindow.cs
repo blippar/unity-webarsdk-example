@@ -14,7 +14,7 @@ public class BlipparWindow : EditorWindow
     [SerializeField]
     //private string sdkURL = "https://webar-sdk.blippar.com/releases/beta/cdn/v1.3.0-unity/blippar/webar-sdk-v1.3.0-beta.min.js";
     //private string defaultURL = "https://webar-sdk.blippar.com/releases/beta/cdn/v1.3.0-unity/blippar/webar-sdk-v1.3.0-beta.min.js";
-    private string sdkPath = "sdk/blippar-webar-sdk-v1.4.2/blippar/webar-sdk-v1.4.2.min.js";    private string defaultPath = "sdk/blippar-webar-sdk-v1.4.2/blippar/webar-sdk-v1.4.2.min.js";
+    private string sdkPath = "sdk/blippar-webar-sdk-v1.4.3/blippar/webar-sdk-v1.4.3.min.js";    private string defaultPath = "sdk/blippar-webar-sdk-v1.4.3/blippar/webar-sdk-v1.4.3.min.js";
 
     private string defaultBuildLocation;
     private string buildLocation;
@@ -519,7 +519,7 @@ public class BlipparWindow : EditorWindow
             return false;
         }
 
-        if (options.GetValue(index).ToString() == "Marker Tracking" && markerCount == 0)
+        if (options.GetValue(index).ToString() == "Marker Tracking" && _simulatorList.markerElements.Count == 0)
         {
             EditorUtility.DisplayDialog("Warning", "Please add marker data in blippar settings", "ok");
             return false;
