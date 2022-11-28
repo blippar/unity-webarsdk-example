@@ -24,8 +24,15 @@ StartTrackingParam: function (check) {
      WEBARSDK.SetGuideAnimation(UTF8ToString(animURL));
   },
 
- DisableAutoScale: function (check) {
-     WEBARSDK.DisableAutoScale(check);
+ SetObjectAutoScale: function (enable) {
+    if (enable)
+        {
+            WEBARSDK.SetAutoScale(true);
+        }
+    else
+        {
+            WEBARSDK.SetAutoScale(false);
+        }
   },
 
 });
