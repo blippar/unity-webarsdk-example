@@ -8,77 +8,75 @@ using System.Linq;
 
 public class BlipparWindow : EditorWindow
 {
-    [SerializeField]
+    #region SerializeField
+    //[SerializeField]
     private string LicenseKey = "xxxxxxxx-1111-2222-3333-yyyyyyyyyyyy";
-    private string defaultLicense = "xxxxxxxx-1111-2222-3333-yyyyyyyyyyyy";
-    [SerializeField]
+
     //private string sdkURL = "https://webar-sdk.blippar.com/releases/beta/cdn/v1.3.0-unity/blippar/webar-sdk-v1.3.0-beta.min.js";
     //private string defaultURL = "https://webar-sdk.blippar.com/releases/beta/cdn/v1.3.0-unity/blippar/webar-sdk-v1.3.0-beta.min.js";
-    private string sdkPath = "sdk/blippar-webar-sdk-v1.4.3/blippar/webar-sdk-v1.4.3.min.js";    private string defaultPath = "sdk/blippar-webar-sdk-v1.4.3/blippar/webar-sdk-v1.4.3.min.js";
+    #endregion
+
+    #region PrivateField
+    private string sdkPath = "sdk/blippar-webar-sdk-v1.4.7/webar-sdk/webar-sdk-v1.4.7.min.js";
+    private string defaultLicense = "xxxxxxxx-1111-2222-3333-yyyyyyyyyyyy";    private string defaultPath = "sdk/blippar-webar-sdk-v1.4.7/webar-sdk/webar-sdk-v1.4.7.min.js";
+    private string saveFile = "Assets/webarSDK/Resources/CustomData.json";
 
     private string defaultBuildLocation;
     private string buildLocation;
+    private string applicationDataPath;    private string buildPath;
+    private string projectNameBuild;
 
-    [SerializeField]    public static string ServerAliasName = "localserver";    [SerializeField]    public static string RelativeHostPath = "/";
-    private Texture2D b_Logo = null;    [SerializeField]    public static string LocalServerPort = "8888";
+    private bool build = false;
+    private bool autoMrkrdetection = true;
+    private bool autoStart = true;    private bool staticCamera = true;    private bool setAutoScale = true;
 
-    public string[] options = new string[] { "None", "Surface Tracking", "Marker Tracking" };
-    public int index = 0;    private bool build = false;    private string applicationDataPath;    private string buildPath;    public UnityEngine.Object myCamera;    public UnityEngine.Object myStage;
+    private int ListSize;
 
-    string saveFile = "Assets/webarSDK/Editor/CustomData.json";
-    CustomData customData = new CustomData();
-
-    private const string _helpText = "Cannot find 'Physical Simulation List' component on any GameObject in the scene!";
-
+    private static int markerCount;
     private static Vector2 _windowsMinSize = Vector2.one * 500f;
-    private static Rect _helpRect = new Rect(0f, 0f, 400f, 100f);
-    private static Rect _listRect = new Rect(new Vector2(140, 235), _windowsMinSize);
 
-    string projectNameBuild;
+    private Texture2D b_Logo = null;
+    private Vector2 scrollPosition = Vector2.zero;
+    #endregion
 
-    Vector2 scrollPosition = Vector2.zero;
+    #region PublicField
+    public string[] options = new string[] { "None", "Surface Tracking", "Marker Tracking" };
+    public int index = 0;    public UnityEngine.Object myCamera;    public UnityEngine.Object myStage;
+    #endregion
 
+    #region ReferenceField
+    CustomData customData = new CustomData();
+    LoadingData loadingData = new LoadingData();
     SerializedObject _objectSO = null;
-
-
     SerializedProperty serializedProperty;
-
-    //enum displayFieldType { DisplayAsAutomaticFields, DisplayAsCustomizableGUIFields }
-    //displayFieldType DisplayFieldType;
-    int ListSize;
-
     BlipparManager blipparManager;
-
     MarkerList _simulatorList;
-    private static int markerCount;    [MenuItem("Blippar/ Settings")]    public static void showLisanceWindow()    {        GetWindow<BlipparWindow>("Blippar");    }    [MenuItem("Blippar/Webar Object/Camera")]    public static void addBlipparCamera()    {         GameObject obj = Instantiate(Resources.Load("webarCamera")) as GameObject;        obj.name = "webarCamera";    }
+    #endregion
+
+    #region MenuItems
+    [MenuItem("Blippar/ Settings")]    public static void showLisanceWindow()    {        GetWindow<BlipparWindow>("Blippar");    }    [MenuItem("Blippar/Webar Object/Camera")]    public static void addBlipparCamera()    {         GameObject obj = Instantiate(Resources.Load("webarCamera")) as GameObject;        obj.name = "webarCamera";    }
 
     [MenuItem("Blippar/Webar Object/Manager")]    public static void addBlipparManager()    {        GameObject obj = Instantiate(Resources.Load("webarManager"), new Vector3(0, 0, 0), new Quaternion(0, 0, 0, 0)) as GameObject;        obj.name = "webarManager";    }
 
     [MenuItem("Blippar/Webar Object/Stage")]    public static void addBlipparStage()    {        GameObject obj = Instantiate(Resources.Load("webarStage"), new Vector3(0, 0, 0), new Quaternion(0, 0, 0, 0)) as GameObject;        obj.name = "webarStage";    }
 
     [MenuItem("Blippar/Webar Object/Marker")]    public static void addBlipparMarker()    {        GameObject obj = Instantiate(Resources.Load("webarMarker"), new Vector3(0, 0, 0), new Quaternion(0, 0, 0, 0)) as GameObject;        markerCount = markerCount + 1;        obj.name = "webarMarker" + markerCount;    }
+    #endregion
 
-    public void readFile()
+    #region FileOperations
+    public void ReadFile()
     {
-        // Does the file exist?
         if (File.Exists(saveFile))
         {
-            // Read the entire file and save its contents.
             string fileContents = File.ReadAllText(saveFile);
-
-            // Deserialize the JSON data 
-            //  into a pattern matching the GameData class.
             customData = JsonUtility.FromJson<CustomData>(fileContents);
         }
     }
 
-    public void writeFile()
+    public void WriteFile()
     {
-        // Serialize the object into JSON and save string.
         string jsonString = JsonUtility.ToJson(customData);
-
-        // Write JSON to file.
-        File.WriteAllText("Assets/webarSDK/Editor/CustomData.json", jsonString);
+        File.WriteAllText("Assets/webarSDK/Resources/CustomData.json", jsonString);
     }
 
     private void CreateFile()
@@ -86,8 +84,9 @@ public class BlipparWindow : EditorWindow
         if (File.Exists(saveFile))
             return;
 
-        saveFile = "Assets/webarSDK/Editor/CustomData.json";
+        saveFile = "Assets/webarSDK/Resources/CustomData.json";
     }
+    #endregion
 
     void OnEnable()
     {
@@ -102,7 +101,7 @@ public class BlipparWindow : EditorWindow
             obj.name = "webarManager";
         }
 
-        readFile();
+        ReadFile();
         if (customData._licenseKey != null)
         {
             LicenseKey = customData._licenseKey;
@@ -117,8 +116,11 @@ public class BlipparWindow : EditorWindow
             index = 2;
         }
 
+        autoStart = customData._isAutoStart;
+        staticCamera = customData._isStaticCamera;
+        setAutoScale = customData._setAutoScale;
+
         projectNameBuild = PlayerSettings.productName;
-        //defaultBuildLocation = buildPath + projectNameBuild;
         defaultBuildLocation = buildPath;
         buildLocation = defaultBuildLocation;
         if (customData._selectedBuildLocation != null)
@@ -152,7 +154,7 @@ public class BlipparWindow : EditorWindow
         LicenseKey = GUILayout.TextField(LicenseKey);
         CreateFile();
         customData._licenseKey = LicenseKey;
-        writeFile();
+        WriteFile();
 
         GUILayout.EndHorizontal();
         GUILayout.Space(5);
@@ -244,11 +246,34 @@ public class BlipparWindow : EditorWindow
         GUILayout.BeginHorizontal();
         GUILayout.Label("webar Camera", /*EditorStyles.boldLabel,*/ GUILayout.MaxWidth(130));
         myCamera = EditorGUILayout.ObjectField(myCamera, typeof(Camera), true);
+        GUILayout.EndHorizontal();
+        GUILayout.Space(5);
+
+        GUILayout.BeginHorizontal();
+        autoStart = EditorGUILayout.Toggle("Auto Start", autoStart);
+        customData._isAutoStart = autoStart;
+        WriteFile();
+        blipparManager.autoStart = autoStart;
+        GUILayout.EndHorizontal();
+        GUILayout.Space(5);
+
+        GUILayout.BeginHorizontal();
+        staticCamera = EditorGUILayout.Toggle("Static Camera", staticCamera);
+        customData._isStaticCamera = staticCamera;
+        WriteFile();
+        blipparManager.isStaticCamera = staticCamera;
+        GUILayout.EndHorizontal();
+        GUILayout.Space(5);
+
+        GUILayout.BeginHorizontal();
+        setAutoScale = EditorGUILayout.Toggle("Set Auto Scale", setAutoScale);
+        customData._setAutoScale = setAutoScale;
+        WriteFile();
+        GUILayout.EndHorizontal();
+        GUILayout.Space(5);
 
         SetDefaults();
 
-        GUILayout.EndHorizontal();
-        GUILayout.Space(5);
         GUILayout.BeginHorizontal();
         GUILayout.Label("webar Stage", /*EditorStyles.boldLabel,*/ GUILayout.MaxWidth(130));
         myStage = EditorGUILayout.ObjectField(myStage, typeof(GameObject), true);
@@ -265,6 +290,35 @@ public class BlipparWindow : EditorWindow
         GUILayout.BeginHorizontal();
         GUILayout.Label("webar Camera", EditorStyles.boldLabel, GUILayout.MaxWidth(130));
         myCamera = EditorGUILayout.ObjectField(myCamera, typeof(Camera), true);
+        GUILayout.EndHorizontal();
+        GUILayout.Space(5);
+
+        GUILayout.BeginHorizontal();
+        autoStart = EditorGUILayout.Toggle("Auto Start", autoStart);
+        customData._isAutoStart = autoStart;
+        WriteFile();
+        blipparManager.autoStart = autoStart;
+        GUILayout.EndHorizontal();
+        GUILayout.Space(5);
+
+        GUILayout.BeginHorizontal();
+        staticCamera = EditorGUILayout.Toggle("Static Camera", staticCamera);
+        customData._isStaticCamera = staticCamera;
+        WriteFile();
+        blipparManager.isStaticCamera = staticCamera;
+        GUILayout.EndHorizontal();
+        GUILayout.Space(5);
+
+        GUILayout.BeginHorizontal();
+        setAutoScale = EditorGUILayout.Toggle("Set auto scale", setAutoScale);
+        customData._setAutoScale = setAutoScale;
+        WriteFile();
+        GUILayout.EndHorizontal();
+        GUILayout.Space(5);
+
+        GUILayout.BeginHorizontal();
+        autoMrkrdetection = EditorGUILayout.Toggle("Auto Marker Detection", autoMrkrdetection);
+        blipparManager.automarkerdetect = autoMrkrdetection;
         GUILayout.EndHorizontal();
         GUILayout.Space(5);
 
@@ -286,7 +340,7 @@ public class BlipparWindow : EditorWindow
             ListSize = EditorGUILayout.IntField("Marker Size", ListSize);
             if (ListSize > 10 || ListSize < 0)
             {
-                EditorUtility.DisplayDialog("Warning", "Please enter a value between 0 and 10", "ok");
+                EditorUtility.DisplayDialog("Warning", "Please enter a value between 1 and 10", "ok");
                 GUILayout.EndHorizontal();
                 return;
             }
@@ -305,9 +359,8 @@ public class BlipparWindow : EditorWindow
         }
         GUILayout.EndHorizontal();
         GUILayout.Space(10);
-        //scrollPosition = GUILayout.BeginScrollView(scrollPosition, false, true, GUILayout.Width(625), GUILayout.Height(400));
+
         scrollPosition = GUILayout.BeginScrollView(scrollPosition, false, true);
-       // EditorGUILayout.Space();
 
         for (int i = 0; i < serializedProperty.arraySize; i++)
         {
@@ -322,7 +375,6 @@ public class BlipparWindow : EditorWindow
                 MyGO.objectReferenceValue = EditorGUILayout.ObjectField("Marker Object", MyGO.objectReferenceValue, typeof(GameObject), true);
             }
 
-            //EditorGUILayout.Space();
             GUILayout.BeginHorizontal();
             EditorGUILayout.LabelField("        ");
             if (GUILayout.Button("Remove Marker"))
@@ -421,7 +473,6 @@ public class BlipparWindow : EditorWindow
             Debug.Log("### BUILDING ###");
             PlayerSettings.WebGL.decompressionFallback = true;
             EditorUserBuildSettings.SwitchActiveBuildTarget(BuildTargetGroup.WebGL, BuildTarget.WebGL);
-            //PlayerSettings.WebGL.decompressionFallback = true;
 
             var report = BuildPipeline.BuildPlayer(
                 new[] {GetScenes()},
@@ -519,7 +570,7 @@ public class BlipparWindow : EditorWindow
             return false;
         }
 
-        if (options.GetValue(index).ToString() == "Marker Tracking" && markerCount == 0)
+        if (options.GetValue(index).ToString() == "Marker Tracking" && _simulatorList.markerElements.Count == 0)
         {
             EditorUtility.DisplayDialog("Warning", "Please add marker data in blippar settings", "ok");
             return false;

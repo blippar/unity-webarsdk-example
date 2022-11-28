@@ -607,13 +607,19 @@ MonoBehaviour:
   m_GameObject: {fileID: 481537983}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 912113408, guid: 65b9f1a0b07ad4cc397ee4acb2954f64, type: 3}
+  m_Script: {fileID: 912113408, guid: 1d2923ebb556d4fd6be656e287a3a9ee, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   OnTargetFound:
     m_PersistentCalls:
       m_Calls: []
   OnTargetLost:
+    m_PersistentCalls:
+      m_Calls: []
+  OnTrackingStarted:
+    m_PersistentCalls:
+      m_Calls: []
+  OnTrackingStopped:
     m_PersistentCalls:
       m_Calls: []
 --- !u!114 &481537989
@@ -625,10 +631,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 481537983}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 342210306, guid: 65b9f1a0b07ad4cc397ee4acb2954f64, type: 3}
+  m_Script: {fileID: 342210306, guid: 1d2923ebb556d4fd6be656e287a3a9ee, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   markerElements: []
+  autoMarkerDetect: 0
 --- !u!114 &481537990
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -638,10 +645,16 @@ MonoBehaviour:
   m_GameObject: {fileID: 481537983}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 2001070765, guid: 65b9f1a0b07ad4cc397ee4acb2954f64, type: 3}
+  m_Script: {fileID: 2001070765, guid: 1d2923ebb556d4fd6be656e287a3a9ee, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   selectedTracking: Surface Tracking
+  automarkerdetect: 0
+  selectedTemplpate: 
+  animURL: 
+  autoStart: 1
+  isStaticCamera: 1
+  isSetAutoScale: 0
   trackingAnimURL: 
 --- !u!1 &731818879
 GameObject:

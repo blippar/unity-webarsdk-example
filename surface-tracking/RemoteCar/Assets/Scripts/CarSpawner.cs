@@ -8,6 +8,7 @@ public class CarSpawner : MonoBehaviour
     public GameObject placementIndicator;
     public GameObject carControls;
     public GameObject placeCarButton;
+    private bool check = true;
 
     void Start ()
     {
@@ -16,9 +17,9 @@ public class CarSpawner : MonoBehaviour
         //placeCarButton.SetActive(true);
         //placementIndicator.SetActive(true);
 
-        car.SetActive(true);
+        //car.SetActive(true);
 
-        carControls.SetActive(true);
+        //carControls.SetActive(true);
     }
 
     public void OnPlaceCarButton ()
@@ -29,5 +30,17 @@ public class CarSpawner : MonoBehaviour
         //carControls.SetActive(true);
         //placeCarButton.SetActive(false);
         //placementIndicator.SetActive(false);
+    }
+
+    private void Update()
+    {
+        if (WEBARSDK.GetTrackingStatus() == "TRACKED" && check)
+        {
+
+            car.SetActive(true);
+
+            carControls.SetActive(true);
+            check = false;
+        }
     }
 }
