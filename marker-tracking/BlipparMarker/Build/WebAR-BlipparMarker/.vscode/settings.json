@@ -1,6 +1,6 @@
 {
     "liveServer.settings.NoBrowser": true,
-    "liveServer.settings.port": 3305,
+    "liveServer.settings.port": 3307,
     "liveServer.settings.root": "/",
     "liveServer.settings.https": {
         "enable": true, //set it true to enable the feature.

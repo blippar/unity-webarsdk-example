@@ -9,9 +9,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 847742090718678580}
-  - component: {fileID: 4710196100699834899}
-  - component: {fileID: 3926142338299000102}
-  - component: {fileID: 2111836297348778500}
+  - component: {fileID: 4256475278898883072}
+  - component: {fileID: 1249317488974326269}
+  - component: {fileID: 4470822419643948902}
   m_Layer: 0
   m_Name: webarManager
   m_TagString: Untagged
@@ -34,7 +34,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &4710196100699834899
+--- !u!114 &4256475278898883072
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -43,12 +43,18 @@ MonoBehaviour:
   m_GameObject: {fileID: 847742090718678571}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 2001070765, guid: 65b9f1a0b07ad4cc397ee4acb2954f64, type: 3}
+  m_Script: {fileID: 2001070765, guid: 1d2923ebb556d4fd6be656e287a3a9ee, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   selectedTracking: 
+  automarkerdetect: 0
+  selectedTemplpate: 
+  animURL: 
+  autoStart: 0
+  isStaticCamera: 0
+  isSetAutoScale: 0
   trackingAnimURL: 
---- !u!114 &3926142338299000102
+--- !u!114 &1249317488974326269
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -57,11 +63,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 847742090718678571}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 342210306, guid: 65b9f1a0b07ad4cc397ee4acb2954f64, type: 3}
+  m_Script: {fileID: 342210306, guid: 1d2923ebb556d4fd6be656e287a3a9ee, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   markerElements: []
---- !u!114 &2111836297348778500
+  autoMarkerDetect: 0
+--- !u!114 &4470822419643948902
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -70,12 +77,18 @@ MonoBehaviour:
   m_GameObject: {fileID: 847742090718678571}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 912113408, guid: 65b9f1a0b07ad4cc397ee4acb2954f64, type: 3}
+  m_Script: {fileID: 912113408, guid: 1d2923ebb556d4fd6be656e287a3a9ee, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   OnTargetFound:
     m_PersistentCalls:
       m_Calls: []
   OnTargetLost:
+    m_PersistentCalls:
+      m_Calls: []
+  OnTrackingStarted:
+    m_PersistentCalls:
+      m_Calls: []
+  OnTrackingStopped:
     m_PersistentCalls:
       m_Calls: []

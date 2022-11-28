@@ -1634,13 +1634,19 @@ MonoBehaviour:
   m_GameObject: {fileID: 1938871565}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 912113408, guid: 65b9f1a0b07ad4cc397ee4acb2954f64, type: 3}
+  m_Script: {fileID: 912113408, guid: 1d2923ebb556d4fd6be656e287a3a9ee, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   OnTargetFound:
     m_PersistentCalls:
       m_Calls: []
   OnTargetLost:
+    m_PersistentCalls:
+      m_Calls: []
+  OnTrackingStarted:
+    m_PersistentCalls:
+      m_Calls: []
+  OnTrackingStopped:
     m_PersistentCalls:
       m_Calls: []
 --- !u!114 &1938871567
@@ -1652,7 +1658,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1938871565}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 342210306, guid: 65b9f1a0b07ad4cc397ee4acb2954f64, type: 3}
+  m_Script: {fileID: 342210306, guid: 1d2923ebb556d4fd6be656e287a3a9ee, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   markerElements:
@@ -1660,6 +1666,7 @@ MonoBehaviour:
     markerObject: {fileID: 110796255}
   - markerID: e3647353-09fc-4ef4-b8a6-7bf1126c83ac
     markerObject: {fileID: 86794363}
+  autoMarkerDetect: 0
 --- !u!4 &1938871568
 Transform:
   m_ObjectHideFlags: 0
@@ -1683,8 +1690,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 1938871565}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 2001070765, guid: 65b9f1a0b07ad4cc397ee4acb2954f64, type: 3}
+  m_Script: {fileID: 2001070765, guid: 1d2923ebb556d4fd6be656e287a3a9ee, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   selectedTracking: Marker Tracking
+  automarkerdetect: 1
+  selectedTemplpate: 
+  animURL: 
+  autoStart: 1
+  isStaticCamera: 1
+  isSetAutoScale: 0
   trackingAnimURL: 
