@@ -1,0 +1,146 @@
+  <!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>{{{ PRODUCT_NAME }}}</title>
+    <link rel="shortcut icon" href="TemplateData/favicon.ico">
+    <link rel="stylesheet" href="TemplateData/style.css">
+    
+<script src = blippar-webar-sdk.....
+webar-mode="surface-tracking"
+static-camera = "true"
+    auto-start="false"
+    auto-init="false"
+auto-marker-detection ="true"
+show-guide-animation-url=""
+
+    rendering-engine="unity"
+logo-src="images/test_logo_here.png"
+logo-height="116px"
+logo-src="images/test_logo_here.png"
+progress-dot-ring-scale="0.30"
+progress-dot-ring-color="#00AAFF"
+progress-ring-scale="0.36"
+progress-ring-color="#00FFFF"
+progress-ring-line-width="5"
+
+alert-border-color="#00FFFF"
+alert-border-width="5px"
+alert-background-color="#283747"
+alert-message-text-color="#00AAFF"
+alert-button-color="#00FFFF"
+alert-button-text-color="#283747"
+alert-button-height="50px"
+alert-box-font-size="24px"
+alert-box-height="182px"
+alert-box-width="290px"
+alert-camera-permission-text="We need to ask for access to the camera so this experience can work!!!"
+alert-camera-permission-button-text="No Problem"
+alert-motion-permission-text="Now we need access to motion sensors!!!"
+alert-motion-permission-button-text="No Problem"
+    
+ui-background-color="#283747"
+ui-portrait-text="This experience is optimized for portrait display"
+ui-text-color="#00FFFF"
+desktop-logo-src="images/test_desktop_logo.png"
+desktop-logo-width="108px"
+desktop-logo-height="30px"
+issue-img-src="images/test_issue_img.png"
+issue-img-width="116px"
+issue-img-height="116px"
+
+auto-scan-instruction="Find a marker to scan..."
+auto-scan-instruction-detect="Marker detecting..."
+auto-scan-instruction-idle="Shake your phone to start detection"
+auto-scan-instruction-text-style="color: orange;"
+auto-scan-style="Display: block; position: absolute; top: 90%; left: 50%; transform: translate(-50%, -50%); z-index: 10000; width: auto; height: auto; text-alogn: center; "
+auto-scan-style-display="block"
+
+scan-btn-display="block"
+scan-btn-height="100px"
+scan-btn-width="100px"
+scan-btn-img-height="50"
+scan-btn-img-width="50"
+scan-btn-img-src="images/user_scan-btn-image_here.png"
+scan-btn-img-transform="translate(-25, -25)"
+scan-btn-img-x-coordinate="50%"
+scan-btn-img-y-coordinate="50%"
+
+scan-btn-instruction="Tap to scan"
+scan-btn-instruction-style="color: white;"
+scan-btn-progress-bar-color="blue"
+scan-btn-progress-bar-cx-coordinate="50"
+scan-btn-progress-bar-cy-coordinate="50"
+scan-btn-progress-bar-radius="35"
+scan-btn-progress-bar-transform="rotate(-90 50 50)"
+scan-btn-progress-circle-cx-coordinate="50%"
+scan-btn-progress-circle-cy-coordinate="50%"
+scan-btn-progress-circle-radius="35"
+scan-btn-progress-circle-style="fill: none; stroke: cyan; stroke-width: 6;"
+
+show-guide-view="true"></script>
+
+  </head>
+  <body class="{{{ SPLASH_SCREEN_STYLE.toLowerCase() }}}">
+      <div id="unity-container" class="unity-desktop">
+        <canvas id="unity-canvas" style="position: absolute;"></canvas>
+      </div>
+<script>
+
+var Yrotvalue = undefined;
+var UNITYINSTANCE = undefined;
+const cameraObjectName = "";
+const stageObjectName = "";
+      const buildUrl = "Build";
+      const loaderUrl = buildUrl + "/{{{ LOADER_FILENAME }}}";
+      const config = {
+        dataUrl: buildUrl + "/{{{ DATA_FILENAME }}}",
+        frameworkUrl: buildUrl + "/{{{ FRAMEWORK_FILENAME }}}",
+        codeUrl: buildUrl + "/{{{ CODE_FILENAME }}}",
+#if MEMORY_FILENAME
+        memoryUrl: buildUrl + "/{{{ MEMORY_FILENAME }}}",
+#endif
+#if SYMBOLS_FILENAME
+        symbolsUrl: buildUrl + "/{{{ SYMBOLS_FILENAME }}}",
+#endif
+        streamingAssetsUrl: "StreamingAssets",
+        companyName: "{{{ COMPANY_NAME }}}",
+        productName: "{{{ PRODUCT_NAME }}}",
+        productVersion: "{{{ PRODUCT_VERSION }}}",
+      };
+
+      const container = document.querySelector("#unity-container");
+      const canvas = document.querySelector("#unity-canvas");
+
+      if (/iPhone|iPad|iPod|Android/i.test(navigator.userAgent)) {
+        container.className = "unity-mobile";
+        config.devicePixelRatio = 1;
+      }
+#if BACKGROUND_FILENAME
+      canvas.style.background = "url('" + buildUrl + "/{{{ BACKGROUND_FILENAME.replace(/'/g, '%27') }}}') center / cover";
+#endif
+
+      const script = document.createElement("script");
+      script.src = loaderUrl;
+      script.onload = () => {
+        createUnityInstance(canvas, config, (progress) => {
+
+        }).then((unityInstance) => {
+          UNITYINSTANCE  = unityInstance;
+          }).catch((message) => {
+          alert(message);
+        });
+      };
+
+      //WEBAR SDK INIT function 
+      document.body.appendChild(script);
+	    function GetCommand(str){
+		        Yrotvalue=(str);
+        }
+
+	    WEBARSDK.InitUnityWebGL(canvas.id, cameraObjectName, stageObjectName);
+      </script>
+  </body>
+</html>
