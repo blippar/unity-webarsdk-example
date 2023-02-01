@@ -12,8 +12,8 @@ public class CarSpawner : MonoBehaviour
 
     void Start ()
     {
-        //car.SetActive(false);
-        //carControls.SetActive(false);
+        car.SetActive(false);
+        carControls.SetActive(false);
         //placeCarButton.SetActive(true);
         //placementIndicator.SetActive(true);
 
@@ -42,5 +42,17 @@ public class CarSpawner : MonoBehaviour
             carControls.SetActive(true);
             check = false;
         }
+    }
+
+    public void MarkerFound()
+    {
+        car.SetActive(true);
+        carControls.SetActive(true);
+    }
+
+    public void MarkerLost()
+    {
+        car.SetActive(false);
+        carControls.SetActive(false);
     }
 }
