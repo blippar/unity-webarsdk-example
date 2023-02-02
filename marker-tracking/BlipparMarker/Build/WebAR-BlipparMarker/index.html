@@ -12,8 +12,8 @@
 webar-mode="marker-tracking"
 static-camera = "true"
     auto-start="false"
-    auto-init="true"
-auto-marker-detection ="false"
+    auto-init="false"
+auto-marker-detection ="true"
 show-guide-animation-url=""
 
     rendering-engine="unity"
@@ -42,6 +42,7 @@ alert-motion-permission-text="Now we need access to motion sensors!!!"
 alert-motion-permission-button-text="No Problem"
     
 ui-background-color="#283747"
+ui-portrait-text="This experience is optimized for portrait display"
 ui-text-color="#00FFFF"
 desktop-logo-src="images/test_desktop_logo.png"
 desktop-logo-width="108px"
@@ -93,12 +94,11 @@ var UNITYINSTANCE = undefined;
 const cameraObjectName = "webarCamera";
 const stageObjectName = "ca4f2f8c-08f5-4cc5-b240-9d661a3823a9, e3647353-09fc-4ef4-b8a6-7bf1126c83ac";
       const buildUrl = "Build";
-      const loaderUrl = buildUrl + "/WebAR-BlipparMarker.asm.loader.js";
+      const loaderUrl = buildUrl + "/WebAR-BlipparMarker.loader.js";
       const config = {
         dataUrl: buildUrl + "/WebAR-BlipparMarker.data.unityweb",
-        frameworkUrl: buildUrl + "/WebAR-BlipparMarker.asm.framework.js.unityweb",
-        codeUrl: buildUrl + "/WebAR-BlipparMarker.asm.js.unityweb",
-        memoryUrl: buildUrl + "/WebAR-BlipparMarker.asm.mem.unityweb",
+        frameworkUrl: buildUrl + "/WebAR-BlipparMarker.framework.js.unityweb",
+        codeUrl: buildUrl + "/WebAR-BlipparMarker.wasm.unityweb",
         streamingAssetsUrl: "StreamingAssets",
         companyName: "Blippar",
         productName: "BlipparMarker",

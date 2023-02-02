@@ -66,6 +66,7 @@ public class LoadingScreen : EditorWindow
     string alert_motion_permission_button_text;
 
     string ui_background_color;
+    string ui_portrait_text;
     string ui_text_color;
     string desktop_logo_src;
     string desktop_logo_width;
@@ -191,6 +192,7 @@ public class LoadingScreen : EditorWindow
             alert_motion_permission_button_text = selectedScreenData.alert_motion_permission_button_text;
 
             ui_background_color = selectedScreenData.ui_background_color;
+            ui_portrait_text = selectedScreenData.ui_portrait_text;
             ui_text_color = selectedScreenData.ui_text_color;
             desktop_logo_src = selectedScreenData.desktop_logo_src;
             desktop_logo_width = selectedScreenData.desktop_logo_width;
@@ -476,6 +478,12 @@ public class LoadingScreen : EditorWindow
         GUILayout.BeginHorizontal();
         GUILayout.Label("UI Background Colour", /*EditorStyles.boldLabel,*/ GUILayout.MaxWidth(216));
         ui_background_color = GUILayout.TextField(ui_background_color);
+        GUILayout.EndHorizontal();
+        GUILayout.Space(5);
+
+        GUILayout.BeginHorizontal();
+        GUILayout.Label("UI Portrait Text", /*EditorStyles.boldLabel,*/ GUILayout.MaxWidth(216));
+        ui_portrait_text = GUILayout.TextField(ui_portrait_text);
         GUILayout.EndHorizontal();
         GUILayout.Space(5);
 
@@ -891,6 +899,7 @@ public class LoadingScreen : EditorWindow
         dataToSave.alert_motion_permission_button_text = alert_motion_permission_button_text;
 
         dataToSave.ui_background_color = ui_background_color;
+        dataToSave.ui_portrait_text = ui_portrait_text;
         dataToSave.ui_text_color = ui_text_color;
         dataToSave.desktop_logo_src = desktop_logo_src;
         dataToSave.desktop_logo_width = desktop_logo_width;

@@ -45,6 +45,7 @@ public class RRController : MonoBehaviour {
 
     public void PlayAnim()
     {
+        Debug.Log("clicked........................");
         hotspot1.SetActive(false);
         animobj.GetComponent<Animator>().runtimeAnimatorController = RRAnim;
         Txt.GetComponent<Text>().text = "Disassemble Engine";
