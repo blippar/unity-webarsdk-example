@@ -9,9 +9,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 847742090718678580}
-  - component: {fileID: 4256475278898883072}
-  - component: {fileID: 1249317488974326269}
-  - component: {fileID: 4470822419643948902}
+  - component: {fileID: 7612449369011391132}
+  - component: {fileID: 8055757592458987569}
+  - component: {fileID: 8832483254563381286}
+  - component: {fileID: 705533391652319977}
   m_Layer: 0
   m_Name: webarManager
   m_TagString: Untagged
@@ -34,7 +35,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &4256475278898883072
+--- !u!114 &7612449369011391132
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -43,18 +44,31 @@ MonoBehaviour:
   m_GameObject: {fileID: 847742090718678571}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 2001070765, guid: 1d2923ebb556d4fd6be656e287a3a9ee, type: 3}
+  m_Script: {fileID: 11500000, guid: 84e9ec1317ed7456d95f90f9034b2f6e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &8055757592458987569
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 847742090718678571}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 2001070765, guid: 3ce6bbe4f5c364c40b8baf621b3cfee1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   selectedTracking: 
   automarkerdetect: 0
   selectedTemplpate: 
   animURL: 
+  autoInit: 0
   autoStart: 0
   isStaticCamera: 0
   isSetAutoScale: 0
   trackingAnimURL: 
---- !u!114 &1249317488974326269
+--- !u!114 &8832483254563381286
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -63,12 +77,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 847742090718678571}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 342210306, guid: 1d2923ebb556d4fd6be656e287a3a9ee, type: 3}
+  m_Script: {fileID: 342210306, guid: 3ce6bbe4f5c364c40b8baf621b3cfee1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   markerElements: []
   autoMarkerDetect: 0
---- !u!114 &4470822419643948902
+--- !u!114 &705533391652319977
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -77,7 +91,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 847742090718678571}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 912113408, guid: 1d2923ebb556d4fd6be656e287a3a9ee, type: 3}
+  m_Script: {fileID: 912113408, guid: 3ce6bbe4f5c364c40b8baf621b3cfee1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   OnTargetFound:

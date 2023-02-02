@@ -16,7 +16,7 @@ public class ShooterCore : MonoBehaviour
     public GameObject winScreen;
     public GameObject loseScreen;
 
-    public bool gameOver;
+    public bool gameOver, targetfound= false;
 
     private Camera cam;
 
@@ -26,12 +26,19 @@ public class ShooterCore : MonoBehaviour
 
     void Start ()
     {
-        healthText.text = "Health: " + health;
+        //healthText.text = "Health: " + health;
         cam = Camera.main;
         curDefendTime = defendTime;
-        Shooting.instance.PlaceCore();
+        //Shooting.instance.PlaceCore();
     }
 
+
+    public void TargetFound()
+    {
+        healthText.text = "Health: " + health;
+        Shooting.instance.PlaceCore();
+        targetfound = true;
+    }
     void Update ()
     {
         // rotate the health text to look at the camera
@@ -41,6 +48,9 @@ public class ShooterCore : MonoBehaviour
             return;
 
         // update defend time text and current time
+        if (!targetfound)
+            return;
+
         defendTimeText.text = "Defend for " + Mathf.RoundToInt(curDefendTime) + "s";
         curDefendTime -= Time.deltaTime;
 
