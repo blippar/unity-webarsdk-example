@@ -26,7 +26,7 @@ Supports Android Chrome and iOS Safari.
 |![Demo][remote-car-demo-gif]  | ![Demo][ar_animation-demo-gif]  |
 |![QR Code][remote-car-demo-qrcode]  | ![QR Code][ar_animation-demo-qrcode]  |
 
-[remote-car-demo-url]: https://webar-sdk.blippar.com/unity-webarsdk-example/v1.4.1/surface-tracking/racing-car/index.html "Live Demo"
+[remote-car-demo-url]: https://webar-sdk.blippar.com/unity-webarsdk-example/v1.4.1/surface-tracking/remote-car/index.html "Live Demo"
 [remote-car-demo-gif]: https://github.com/blippar/unity-webarsdk-example/blob/main/Assets/videos/RemoteCar.gif "Remote Car"
 [remote-car-demo-qrcode]: https://github.com/blippar/unity-webarsdk-example/blob/main/Assets/images/RemoteCar.png "QR Code"
 
