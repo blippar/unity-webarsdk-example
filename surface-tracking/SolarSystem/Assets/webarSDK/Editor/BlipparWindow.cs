@@ -13,13 +13,13 @@ public class BlipparWindow : EditorWindow
     //[SerializeField]
     private string LicenseKey = "xxxx-1111-2222-3333-yyyy";
     private string domainName = "https://xxxx.yyy";
-    //private string sdkURL = "https://webar-sdk.blippar.com/releases/beta/cdn/v1.3.0-unity/blippar/webar-sdk-v1.3.0-beta.min.js";
-    //private string defaultURL = "https://webar-sdk.blippar.com/releases/beta/cdn/v1.3.0-unity/blippar/webar-sdk-v1.3.0-beta.min.js";
+    //private string sdkURL = "https://webar-sdk.blippar.com/releases/beta/cdn/v1.5.0-unity/blippar/webar-sdk-v1.5.0-beta.min.js";
+    //private string defaultURL = "https://webar-sdk.blippar.com/releases/beta/cdn/v1.5.0-unity/blippar/webar-sdk-v1.5.0-beta.min.js";
     #endregion
 
     #region PrivateField
-    private string sdkPath = "sdk/blippar-webar-sdk-v1.4.7/webar-sdk/webar-sdk-v1.4.7.min.js";
-    private string defaultLicense = "xxxx-1111-2222-3333-yyyy";    private string defaultDomainName = "https://xxxx.yyy";    private string defaultPath = "sdk/blippar-webar-sdk-v1.4.7/webar-sdk/webar-sdk-v1.4.7.min.js";
+    private string sdkPath = "sdk/blippar-webar-sdk-v1.5.0/webar-sdk/webar-sdk-v1.5.0.min.js";
+    private string defaultLicense = "xxxx-1111-2222-3333-yyyy";    private string defaultDomainName = "https://xxxx.yyy";    private string defaultPath = "sdk/blippar-webar-sdk-v1.5.0/webar-sdk/webar-sdk-v1.5.0.min.js";
     private string saveFile = "Assets/webarSDK/Resources/CustomData.json";
 
     private string defaultBuildLocation;
@@ -29,7 +29,7 @@ public class BlipparWindow : EditorWindow
 
     private bool build = false;
     private bool autoMrkrdetection = true;
-    private bool autoStart = true;    private bool autoInit = true;    private bool staticCamera = true;    private bool setAutoScale = true;
+    private bool autoStart = true;    private bool autoInit = true;    private bool staticCamera = false;    private bool setAutoScale = true;
 
     private int ListSize;
 
@@ -154,7 +154,7 @@ public class BlipparWindow : EditorWindow
 
         GUILayout.Label(b_Logo, EditorStyles.centeredGreyMiniLabel);
         GUIStyle myStyle = new GUIStyle();
-        GUILayout.Label("v_1.0.22", EditorStyles.centeredGreyMiniLabel);
+        GUILayout.Label("v_1.0.25", EditorStyles.centeredGreyMiniLabel);
 
         GUILayout.Space(10);
 
