@@ -12,11 +12,11 @@ Supports Android Chrome and iOS Safari.
 |![Demo][ar_shooter-demo-gif]  | ![Demo][solar_system-demo-gif]  | 
 |![QR Code][ar_shooter-demo-qrcode]  | ![QR Code][solar_system-demo-qrcode]  | 
 
-[ar_shooter-demo-url]: https://webar-sdk.blippar.com/unity-webarsdk-example/v1.4.1/surface-tracking/ar-shooter/index.html "Live Demo"
+[ar_shooter-demo-url]: https://unity-webar-sdk.blippar.com/unity-webarsdk-example/v1.5.0/surface-tracking/WebAR-AR-Shooter/index.html "Live Demo"
 [ar_shooter-demo-gif]: https://github.com/blippar/unity-webarsdk-example/blob/main/Assets/videos/AR-Shooter.gif "AR-Shooter"
 [ar_shooter-demo-qrcode]: https://github.com/blippar/unity-webarsdk-example/blob/main/Assets/images/ar-shooter.png "QR Code"
 
-[solar_system-demo-url]: https://webar-sdk.blippar.com/unity-webarsdk-example/v1.4.1/surface-tracking/solar-system/index.html "Live Demo"
+[solar_system-demo-url]: https://unity-webar-sdk.blippar.com/unity-webarsdk-example/v1.5.0/surface-tracking/WebAR-SolarSyatem/index.html "Live Demo"
 [solar_system-demo-gif]: https://github.com/blippar/unity-webarsdk-example/blob/main/Assets/videos/SolarSystem.gif "solar system"
 [solar_system-demo-qrcode]: https://github.com/blippar/unity-webarsdk-example/blob/main/Assets/images/solar-system.png "QR Code"
 
@@ -26,11 +26,11 @@ Supports Android Chrome and iOS Safari.
 |![Demo][remote-car-demo-gif]  | ![Demo][ar_animation-demo-gif]  |
 |![QR Code][remote-car-demo-qrcode]  | ![QR Code][ar_animation-demo-qrcode]  |
 
-[remote-car-demo-url]: https://webar-sdk.blippar.com/unity-webarsdk-example/v1.4.1/surface-tracking/remote-car/index.html "Live Demo"
+[remote-car-demo-url]: https://unity-webar-sdk.blippar.com/unity-webarsdk-example/v1.5.0/surface-tracking/WebAR-remotecar/index.html "Live Demo"
 [remote-car-demo-gif]: https://github.com/blippar/unity-webarsdk-example/blob/main/Assets/videos/RemoteCar.gif "Remote Car"
 [remote-car-demo-qrcode]: https://github.com/blippar/unity-webarsdk-example/blob/main/Assets/images/RemoteCar.png "QR Code"
 
-[ar_animation-demo-url]: https://webar-sdk.blippar.com/unity-webarsdk-example/v1.4.1/surface-tracking/ar-animation/index.html "Live Demo"
+[ar_animation-demo-url]: https://unity-webar-sdk.blippar.com/unity-webarsdk-example/v1.5.0/surface-tracking/WebAR-BlipparAnimation/index.html "Live Demo"
 [ar_animation-demo-gif]: https://github.com/blippar/unity-webarsdk-example/blob/main/Assets/videos/ARAnimation.gif "ar animation"
 [ar_animation-demo-qrcode]: https://github.com/blippar/unity-webarsdk-example/blob/main/Assets/images/ar-animation.png "QR Code"
 
@@ -43,7 +43,7 @@ Supports Android Chrome and iOS Safari.
 |![Demo][marker-tracking-demo-gif]  |
 |![QR Code][marker-tracking-qrcode]  |
 
-[marker-tracking-demo-url]: https://webar-sdk.blippar.com/unity-webarsdk-example/v1.4.1/marker-tracking/blippar-marker/index.html "Live Demo"
+[marker-tracking-demo-url]: https://unity-webar-sdk.blippar.com/unity-webarsdk-example/v1.5.0/marker-tracking/WebAR-BlipparMarker/index.html "Live Demo"
 [marker-tracking-demo-gif]: https://github.com/blippar/unity-webarsdk-example/blob/main/Assets/videos/marker-tracking.gif "Marker Tracking"
 [marker-tracking-qrcode]: https://github.com/blippar/unity-webarsdk-example/blob/main/Assets/images/marker-tracking.png "QR Code"
 
