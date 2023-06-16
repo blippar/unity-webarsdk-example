@@ -16,7 +16,7 @@ Supports Android Chrome and iOS Safari.
 [ar_shooter-demo-gif]: https://github.com/blippar/unity-webarsdk-example/blob/main/Assets/videos/AR-Shooter.gif "AR-Shooter"
 [ar_shooter-demo-qrcode]: https://github.com/blippar/unity-webarsdk-example/blob/main/Assets/images/ar-shooter.png "QR Code"
 
-[solar_system-demo-url]: https://unity-webar-sdk.blippar.com/unity-webarsdk-example/v1.5.1/surface-tracking/WebAR-SolarSyatem/index.html "Live Demo"
+[solar_system-demo-url]: https://unity-webar-sdk.blippar.com/unity-webarsdk-example/v1.6.0.0/surface-tracking/WebAR-SolarSyatem/index.html "Live Demo"
 [solar_system-demo-gif]: https://github.com/blippar/unity-webarsdk-example/blob/main/Assets/videos/SolarSystem.gif "solar system"
 [solar_system-demo-qrcode]: https://github.com/blippar/unity-webarsdk-example/blob/main/Assets/images/solar-system.png "QR Code"
 
