@@ -35,4 +35,7 @@ StartTrackingParam: function (check) {
         }
   },
 
+  IsMobileBrowser: function () {
+    return (/iPhone|iPad|iPod|Android/i.test(navigator.userAgent));
+  },
 });

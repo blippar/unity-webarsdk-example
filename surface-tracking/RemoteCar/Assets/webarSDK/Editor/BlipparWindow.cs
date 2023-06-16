@@ -18,8 +18,8 @@ public class BlipparWindow : EditorWindow
     #endregion
 
     #region PrivateField
-    private string sdkPath = "sdk/blippar-webar-sdk-v1.5.1/webar-sdk/webar-sdk-v1.5.1.min.js";
-    private string defaultLicense = "xxxx-1111-2222-3333-yyyy";    private string defaultDomainName = "https://xxxx.yyy";    private string defaultPath = "sdk/blippar-webar-sdk-v1.5.1/webar-sdk/webar-sdk-v1.5.1.min.js";
+    private string sdkPath = "sdk/blippar-webar-sdk-v1.6.0/webar-sdk/webar-sdk-v1.6.0.min.js";
+    private string defaultLicense = "xxxx-1111-2222-3333-yyyy";    private string defaultDomainName = "https://xxxx.yyy";    private string defaultPath = "sdk/blippar-webar-sdk-v1.6.0/webar-sdk/webar-sdk-v1.6.0.min.js";
     private string saveFile = "Assets/webarSDK/Resources/CustomData.json";
 
     private string defaultBuildLocation;
@@ -30,6 +30,10 @@ public class BlipparWindow : EditorWindow
     private bool build = false;
     private bool autoMrkrdetection = true;
     private bool autoStart = true;    private bool autoInit = true;    private bool staticCamera = true;    private bool setAutoScale = true;
+    private bool renderSceneOnDesktop = false;
+    private bool showQrOnDesktop = false;
+    private bool enableTrackingOnDesktop = false;
+    private bool enableMirroringOnDesktop = false;
 
     private int ListSize;
 
@@ -132,6 +136,10 @@ public class BlipparWindow : EditorWindow
         autoStart = customData._isAutoStart;
         staticCamera = customData._isStaticCamera;
         setAutoScale = customData._setAutoScale;
+        renderSceneOnDesktop = customData._renderSceneOnDesktop;
+        showQrOnDesktop = customData._showQrCardOnDesktop;
+        enableTrackingOnDesktop = customData._enableTrackingOnDesktop;
+        enableMirroringOnDesktop = customData._enableMirroringOnDesktop;
 
         projectNameBuild = PlayerSettings.productName;
         defaultBuildLocation = buildPath;
@@ -154,7 +162,7 @@ public class BlipparWindow : EditorWindow
 
         GUILayout.Label(b_Logo, EditorStyles.centeredGreyMiniLabel);
         GUIStyle myStyle = new GUIStyle();
-        GUILayout.Label("v_1.0.27", EditorStyles.centeredGreyMiniLabel);
+        GUILayout.Label("v_1.6.0.0", EditorStyles.centeredGreyMiniLabel);
 
         GUILayout.Space(10);
 
@@ -268,13 +276,14 @@ public class BlipparWindow : EditorWindow
     {
         GUILayout.Label("Scene References", EditorStyles.boldLabel, GUILayout.MaxWidth(130));
         GUILayout.BeginHorizontal();
-        GUILayout.Label("webar Camera", /*EditorStyles.boldLabel,*/ GUILayout.MaxWidth(130));
+        GUILayout.Label("webar Camera", /*EditorStyles.boldLabel,*/ GUILayout.MaxWidth(175));
         myCamera = EditorGUILayout.ObjectField(myCamera, typeof(Camera), true);
         GUILayout.EndHorizontal();
         GUILayout.Space(3);
 
         GUILayout.BeginHorizontal();
-        autoInit = EditorGUILayout.Toggle("Auto Init", autoInit);
+        GUILayout.Label("Auto Init", /*EditorStyles.boldLabel,*/ GUILayout.MaxWidth(175));
+        autoInit = EditorGUILayout.Toggle("", autoInit);
         customData._isAutoInit = autoInit;
         WriteFile();
         blipparManager.autoInit = autoInit;
@@ -282,7 +291,8 @@ public class BlipparWindow : EditorWindow
         GUILayout.Space(3);
 
         GUILayout.BeginHorizontal();
-        autoStart = EditorGUILayout.Toggle("Auto Start", autoStart);
+        GUILayout.Label("Auto Start", /*EditorStyles.boldLabel,*/ GUILayout.MaxWidth(175));
+        autoStart = EditorGUILayout.Toggle("", autoStart);
         customData._isAutoStart = autoStart;
         WriteFile();
         blipparManager.autoStart = autoStart;
@@ -290,7 +300,8 @@ public class BlipparWindow : EditorWindow
         GUILayout.Space(3);
 
         GUILayout.BeginHorizontal();
-        staticCamera = EditorGUILayout.Toggle("Static Camera", staticCamera);
+        GUILayout.Label("Static Camera", /*EditorStyles.boldLabel,*/ GUILayout.MaxWidth(175));
+        staticCamera = EditorGUILayout.Toggle("", staticCamera);
         customData._isStaticCamera = staticCamera;
         WriteFile();
         blipparManager.isStaticCamera = staticCamera;
@@ -298,8 +309,25 @@ public class BlipparWindow : EditorWindow
         GUILayout.Space(3);
 
         GUILayout.BeginHorizontal();
-        setAutoScale = EditorGUILayout.Toggle("Set Auto Scale", setAutoScale);
+        GUILayout.Label("Set Auto Scale", /*EditorStyles.boldLabel,*/ GUILayout.MaxWidth(175));
+        setAutoScale = EditorGUILayout.Toggle("", setAutoScale);
         customData._setAutoScale = setAutoScale;
+        WriteFile();
+        GUILayout.EndHorizontal();
+        GUILayout.Space(3);
+
+        GUILayout.BeginHorizontal();
+        GUILayout.Label("Render Scene On Desktop", /*EditorStyles.boldLabel,*/ GUILayout.MaxWidth(175));
+        renderSceneOnDesktop = EditorGUILayout.Toggle("", renderSceneOnDesktop);
+        customData._renderSceneOnDesktop = renderSceneOnDesktop;
+        WriteFile();
+        GUILayout.EndHorizontal();
+        GUILayout.Space(3);
+
+        GUILayout.BeginHorizontal();
+        GUILayout.Label("Show QR Card On Desktop", /*EditorStyles.boldLabel,*/ GUILayout.MaxWidth(175));
+        showQrOnDesktop = EditorGUILayout.Toggle("", showQrOnDesktop);
+        customData._showQrCardOnDesktop = showQrOnDesktop;
         WriteFile();
         GUILayout.EndHorizontal();
         GUILayout.Space(3);
@@ -307,7 +335,7 @@ public class BlipparWindow : EditorWindow
         SetDefaults();
 
         GUILayout.BeginHorizontal();
-        GUILayout.Label("webar Stage", /*EditorStyles.boldLabel,*/ GUILayout.MaxWidth(130));
+        GUILayout.Label("webar Stage", /*EditorStyles.boldLabel,*/ GUILayout.MaxWidth(175));
         myStage = EditorGUILayout.ObjectField(myStage, typeof(GameObject), true);
         GUILayout.EndHorizontal();
         GUILayout.Space(10);
@@ -320,13 +348,14 @@ public class BlipparWindow : EditorWindow
 
         GUILayout.Label("Scene References", EditorStyles.boldLabel, GUILayout.MaxWidth(130));
         GUILayout.BeginHorizontal();
-        GUILayout.Label("webar Camera", EditorStyles.boldLabel, GUILayout.MaxWidth(130));
+        GUILayout.Label("webar Camera", EditorStyles.boldLabel, GUILayout.MaxWidth(175));
         myCamera = EditorGUILayout.ObjectField(myCamera, typeof(Camera), true);
         GUILayout.EndHorizontal();
         GUILayout.Space(5);
 
         GUILayout.BeginHorizontal();
-        autoInit = EditorGUILayout.Toggle("Auto Init", autoInit);
+        GUILayout.Label("Auto Init", /*EditorStyles.boldLabel,*/ GUILayout.MaxWidth(175));
+        autoInit = EditorGUILayout.Toggle("", autoInit);
         customData._isAutoInit = autoInit;
         WriteFile();
         blipparManager.autoInit = autoInit;
@@ -334,7 +363,8 @@ public class BlipparWindow : EditorWindow
         GUILayout.Space(3);
 
         GUILayout.BeginHorizontal();
-        autoStart = EditorGUILayout.Toggle("Auto Start", autoStart);
+        GUILayout.Label("Auto Start", /*EditorStyles.boldLabel,*/ GUILayout.MaxWidth(175));
+        autoStart = EditorGUILayout.Toggle("", autoStart);
         customData._isAutoStart = autoStart;
         WriteFile();
         blipparManager.autoStart = autoStart;
@@ -342,7 +372,8 @@ public class BlipparWindow : EditorWindow
         GUILayout.Space(5);
 
         GUILayout.BeginHorizontal();
-        staticCamera = EditorGUILayout.Toggle("Static Camera", staticCamera);
+        GUILayout.Label("Static Camera", /*EditorStyles.boldLabel,*/ GUILayout.MaxWidth(175));
+        staticCamera = EditorGUILayout.Toggle("", staticCamera);
         customData._isStaticCamera = staticCamera;
         WriteFile();
         blipparManager.isStaticCamera = staticCamera;
@@ -350,17 +381,51 @@ public class BlipparWindow : EditorWindow
         GUILayout.Space(5);
 
         GUILayout.BeginHorizontal();
-        setAutoScale = EditorGUILayout.Toggle("Set auto scale", setAutoScale);
+        GUILayout.Label("Set auto scale", /*EditorStyles.boldLabel,*/ GUILayout.MaxWidth(175));
+        setAutoScale = EditorGUILayout.Toggle("", setAutoScale);
         customData._setAutoScale = setAutoScale;
         WriteFile();
         GUILayout.EndHorizontal();
         GUILayout.Space(5);
 
         GUILayout.BeginHorizontal();
-        autoMrkrdetection = EditorGUILayout.Toggle("Auto Marker Detection", autoMrkrdetection);
+        GUILayout.Label("Auto Marker Detection", /*EditorStyles.boldLabel,*/ GUILayout.MaxWidth(175));
+        autoMrkrdetection = EditorGUILayout.Toggle("", autoMrkrdetection);
         blipparManager.automarkerdetect = autoMrkrdetection;
         GUILayout.EndHorizontal();
         GUILayout.Space(5);
+
+        //GUILayout.BeginHorizontal();
+        //renderSceneOnDesktop = EditorGUILayout.Toggle("Render Scene On Desktop", renderSceneOnDesktop);
+        //customData._renderSceneOnDesktop = renderSceneOnDesktop;
+        //WriteFile();
+        //GUILayout.EndHorizontal();
+        //GUILayout.Space(3);
+
+
+        GUILayout.BeginHorizontal();
+        GUILayout.Label("Enable Tracking On Desktop", /*EditorStyles.boldLabel,*/ GUILayout.MaxWidth(175));
+        enableTrackingOnDesktop = EditorGUILayout.Toggle("", enableTrackingOnDesktop);
+        customData._enableTrackingOnDesktop = enableTrackingOnDesktop;
+        WriteFile();
+        GUILayout.EndHorizontal();
+        GUILayout.Space(3);
+
+        GUILayout.BeginHorizontal();
+        GUILayout.Label("Enable Mirroring On Desktop", /*EditorStyles.boldLabel,*/ GUILayout.MaxWidth(175));
+        enableMirroringOnDesktop = EditorGUILayout.Toggle("", enableMirroringOnDesktop);
+        customData._enableMirroringOnDesktop = enableMirroringOnDesktop;
+        WriteFile();
+        GUILayout.EndHorizontal();
+        GUILayout.Space(3);
+
+        GUILayout.BeginHorizontal();
+        GUILayout.Label("Show QR Card On Desktop", /*EditorStyles.boldLabel,*/ GUILayout.MaxWidth(175));
+        showQrOnDesktop = EditorGUILayout.Toggle("", showQrOnDesktop);
+        customData._showQrCardOnDesktop = showQrOnDesktop;
+        WriteFile();
+        GUILayout.EndHorizontal();
+        GUILayout.Space(3);
 
         SetDefaults();
 
@@ -521,7 +586,7 @@ public class BlipparWindow : EditorWindow
             if (options.GetValue(index).ToString() == "Surface Tracking")
             {
                 blipparManager.selectedTracking = "Surface Tracking";
-                blipparManager.ReadString(true, sdkPath, LicenseKey, myCamera.name, myStage.name);
+                blipparManager.ReadString(true, sdkPath, LicenseKey, myCamera.name, myStage.name, renderSceneOnDesktop, showQrOnDesktop);
             }
             else if (options.GetValue(index).ToString() == "Marker Tracking")
             {
@@ -532,7 +597,7 @@ public class BlipparWindow : EditorWindow
                     MarkerData marker = markers[i];
                     marker.enabled = false;
                 }
-                blipparManager.ReadMarkers(true, sdkPath, LicenseKey, myCamera.name, _simulatorList);
+                blipparManager.ReadMarkers(true, sdkPath, LicenseKey, myCamera.name, _simulatorList, enableTrackingOnDesktop, enableMirroringOnDesktop, showQrOnDesktop);
             }
             Debug.Log("### BUILDING ###");
             PlayerSettings.WebGL.decompressionFallback = true;
