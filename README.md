@@ -43,7 +43,7 @@ Supports Android Chrome and iOS Safari.
 |![Demo][marker-tracking-demo-gif]  |
 |![QR Code][marker-tracking-qrcode]  |
 
-[marker-tracking-demo-url]: https://unity-webar-sdk.blippar.com/unity-webarsdk-example/v1.5.1/marker-tracking/WebAR-BlipparMarker/index.html "Live Demo"
+[marker-tracking-demo-url]: https://unity-webar-sdk.blippar.com/unity-webarsdk-example/v1.6.0.0/marker-tracking/WebAR-BlipparMarker/index.html "Live Demo"
 [marker-tracking-demo-gif]: https://github.com/blippar/unity-webarsdk-example/blob/main/Assets/videos/marker-tracking.gif "Marker Tracking"
 [marker-tracking-qrcode]: https://github.com/blippar/unity-webarsdk-example/blob/main/Assets/images/marker-tracking.png "QR Code"
 
