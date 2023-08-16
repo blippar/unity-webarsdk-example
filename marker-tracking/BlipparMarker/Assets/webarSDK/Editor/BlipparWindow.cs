@@ -18,8 +18,8 @@ public class BlipparWindow : EditorWindow
     #endregion
 
     #region PrivateField
-    private string sdkPath = "sdk/blippar-webar-sdk-v1.6.0/webar-sdk/webar-sdk-v1.6.0.min.js";
-    private string defaultLicense = "xxxx-1111-2222-3333-yyyy";    private string defaultDomainName = "https://xxxx.yyy";    private string defaultPath = "sdk/blippar-webar-sdk-v1.6.0/webar-sdk/webar-sdk-v1.6.0.min.js";
+    private string sdkPath = "sdk/blippar-webar-sdk-v1.6.3/webar-sdk/webar-sdk-v1.6.3.min.js";
+    private string defaultLicense = "xxxx-1111-2222-3333-yyyy";    private string defaultDomainName = "https://xxxx.yyy";    private string defaultPath = "sdk/blippar-webar-sdk-v1.6.3/webar-sdk/webar-sdk-v1.6.3.min.js";
     private string saveFile = "Assets/webarSDK/Resources/CustomData.json";
 
     private string defaultBuildLocation;
@@ -30,6 +30,7 @@ public class BlipparWindow : EditorWindow
     private bool build = false;
     private bool autoMrkrdetection = true;
     private bool autoStart = true;    private bool autoInit = true;    private bool staticCamera = true;    private bool setAutoScale = true;
+    private bool enablePhotoUI = true;
     private bool renderSceneOnDesktop = false;
     private bool showQrOnDesktop = false;
     private bool enableTrackingOnDesktop = false;
@@ -136,6 +137,7 @@ public class BlipparWindow : EditorWindow
         autoStart = customData._isAutoStart;
         staticCamera = customData._isStaticCamera;
         setAutoScale = customData._setAutoScale;
+        enablePhotoUI = customData._enablePhotoUI;
         renderSceneOnDesktop = customData._renderSceneOnDesktop;
         showQrOnDesktop = customData._showQrCardOnDesktop;
         enableTrackingOnDesktop = customData._enableTrackingOnDesktop;
@@ -162,7 +164,7 @@ public class BlipparWindow : EditorWindow
 
         GUILayout.Label(b_Logo, EditorStyles.centeredGreyMiniLabel);
         GUIStyle myStyle = new GUIStyle();
-        GUILayout.Label("v_1.6.0.0", EditorStyles.centeredGreyMiniLabel);
+        GUILayout.Label("v_1.6.3.0", EditorStyles.centeredGreyMiniLabel);
 
         GUILayout.Space(10);
 
@@ -317,6 +319,14 @@ public class BlipparWindow : EditorWindow
         GUILayout.Space(3);
 
         GUILayout.BeginHorizontal();
+        GUILayout.Label("Enable Photo UI", /*EditorStyles.boldLabel,*/ GUILayout.MaxWidth(175));
+        enablePhotoUI = EditorGUILayout.Toggle("", enablePhotoUI);
+        customData._enablePhotoUI = enablePhotoUI;
+        WriteFile();
+        GUILayout.EndHorizontal();
+        GUILayout.Space(3);
+
+        GUILayout.BeginHorizontal();
         GUILayout.Label("Render Scene On Desktop", /*EditorStyles.boldLabel,*/ GUILayout.MaxWidth(175));
         renderSceneOnDesktop = EditorGUILayout.Toggle("", renderSceneOnDesktop);
         customData._renderSceneOnDesktop = renderSceneOnDesktop;
@@ -384,6 +394,14 @@ public class BlipparWindow : EditorWindow
         GUILayout.Label("Set auto scale", /*EditorStyles.boldLabel,*/ GUILayout.MaxWidth(175));
         setAutoScale = EditorGUILayout.Toggle("", setAutoScale);
         customData._setAutoScale = setAutoScale;
+        WriteFile();
+        GUILayout.EndHorizontal();
+        GUILayout.Space(5);
+
+        GUILayout.BeginHorizontal();
+        GUILayout.Label("Enable Photo UI", /*EditorStyles.boldLabel,*/ GUILayout.MaxWidth(175));
+        enablePhotoUI = EditorGUILayout.Toggle("", enablePhotoUI);
+        customData._enablePhotoUI = enablePhotoUI;
         WriteFile();
         GUILayout.EndHorizontal();
         GUILayout.Space(5);
@@ -586,7 +604,7 @@ public class BlipparWindow : EditorWindow
             if (options.GetValue(index).ToString() == "Surface Tracking")
             {
                 blipparManager.selectedTracking = "Surface Tracking";
-                blipparManager.ReadString(true, sdkPath, LicenseKey, myCamera.name, myStage.name, renderSceneOnDesktop, showQrOnDesktop);
+                blipparManager.ReadString(true, sdkPath, LicenseKey, myCamera.name, myStage.name, enablePhotoUI ,renderSceneOnDesktop, showQrOnDesktop);
             }
             else if (options.GetValue(index).ToString() == "Marker Tracking")
             {
@@ -597,7 +615,7 @@ public class BlipparWindow : EditorWindow
                     MarkerData marker = markers[i];
                     marker.enabled = false;
                 }
-                blipparManager.ReadMarkers(true, sdkPath, LicenseKey, myCamera.name, _simulatorList, enableTrackingOnDesktop, enableMirroringOnDesktop, showQrOnDesktop);
+                blipparManager.ReadMarkers(true, sdkPath, LicenseKey, myCamera.name, enablePhotoUI, _simulatorList, enableTrackingOnDesktop, enableMirroringOnDesktop, showQrOnDesktop);
             }
             Debug.Log("### BUILDING ###");
             PlayerSettings.WebGL.decompressionFallback = true;

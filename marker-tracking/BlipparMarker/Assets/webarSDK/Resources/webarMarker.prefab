@@ -125,7 +125,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7791779338927726027}
-  - component: {fileID: 3388134070902332165}
+  - component: {fileID: 3315712738245584349}
   m_Layer: 0
   m_Name: webarMarker
   m_TagString: Untagged
@@ -149,7 +149,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 2, z: 0}
---- !u!114 &3388134070902332165
+--- !u!114 &3315712738245584349
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -158,7 +158,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 7791779338927726020}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: -2075369478, guid: e12decae046f54ab68adaf2430358180, type: 3}
+  m_Script: {fileID: -2075369478, guid: 5e33c9c004abd4171805a0b18b9ad156, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   markerDataList:

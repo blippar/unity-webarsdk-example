@@ -7,6 +7,7 @@ using System.IO;
 using System.Linq;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
+using System.Runtime.CompilerServices;
 
 public class LoadingScreen : EditorWindow
 {
@@ -49,14 +50,17 @@ public class LoadingScreen : EditorWindow
     string progress_ring_scale;
     string progress_ring_color;
     string progress_ring_line_width;
+    string loading_progress_type;
 
     string alert_border_color;
     string alert_border_width;
+    string alert_border_radius;
     string alert_background_color;
     string alert_message_text_color;
     string alert_button_color;
     string alert_button_text_color;
     string alert_button_height;
+    string alert_button_border_radius;
     string alert_box_font_size;
     string alert_box_height;
     string alert_box_width;
@@ -117,6 +121,10 @@ public class LoadingScreen : EditorWindow
     string scan_btn_progress_circle_style_stroke;
     string scan_btn_progress_circle_style_stroke_width;
 
+    bool ios_camera_permission;
+    string auto_scan_instruction_idle_on_desktop;
+
+
     [MenuItem("Blippar/ Loading Screen")]
     public static void showLisanceWindow()
     {
@@ -175,14 +183,17 @@ public class LoadingScreen : EditorWindow
             progress_ring_scale = selectedScreenData.progress_ring_scale;
             progress_ring_color = selectedScreenData.progress_ring_color;
             progress_ring_line_width = selectedScreenData.progress_ring_line_width;
+            loading_progress_type = selectedScreenData.loading_progress_type;
 
             alert_border_color = selectedScreenData.alert_border_color;
             alert_border_width = selectedScreenData.alert_border_width;
+            alert_border_radius = selectedScreenData.alert_border_radius;
             alert_background_color = selectedScreenData.alert_background_color;
             alert_message_text_color = selectedScreenData.alert_message_text_color;
             alert_button_color = selectedScreenData.alert_button_color;
             alert_button_text_color = selectedScreenData.alert_button_text_color;
             alert_button_height = selectedScreenData.alert_button_height;
+            alert_button_border_radius = selectedScreenData.alert_button_border_radius;
             alert_box_font_size = selectedScreenData.alert_box_font_size;
             alert_box_height = selectedScreenData.alert_box_height;
             alert_box_width = selectedScreenData.alert_box_width;
@@ -242,6 +253,9 @@ public class LoadingScreen : EditorWindow
             scan_btn_progress_circle_style_fill = selectedScreenData.scan_btn_progress_circle_style_fill;
             scan_btn_progress_circle_style_stroke = selectedScreenData.scan_btn_progress_circle_style_stroke;
             scan_btn_progress_circle_style_stroke_width = selectedScreenData.scan_btn_progress_circle_style_stroke_width;
+
+            ios_camera_permission = selectedScreenData.ios_camera_permission;
+            auto_scan_instruction_idle_on_desktop = selectedScreenData.auto_scan_instruction_idle_on_desktop;
 
             showGuideView = selectedScreenData.showGuideView;
             _trackingAnimURL = selectedScreenData._trackingAnimURL;
@@ -407,6 +421,12 @@ public class LoadingScreen : EditorWindow
         GUILayout.Label("Progress Ring Line Width", /*EditorStyles.boldLabel,*/ GUILayout.MaxWidth(216));
         progress_ring_line_width = GUILayout.TextField(progress_ring_line_width);
         GUILayout.EndHorizontal();
+        GUILayout.Space(5);
+
+        GUILayout.BeginHorizontal();
+        GUILayout.Label("Loading Progress Type", /*EditorStyles.boldLabel,*/ GUILayout.MaxWidth(216));
+        loading_progress_type = GUILayout.TextField(loading_progress_type);
+        GUILayout.EndHorizontal();
         GUILayout.Space(20);
 
         GUILayout.BeginHorizontal();
@@ -418,6 +438,12 @@ public class LoadingScreen : EditorWindow
         GUILayout.BeginHorizontal();
         GUILayout.Label("Alert Border Width", /*EditorStyles.boldLabel,*/ GUILayout.MaxWidth(216));
         alert_border_width = GUILayout.TextField(alert_border_width);
+        GUILayout.EndHorizontal();
+        GUILayout.Space(5);
+
+        GUILayout.BeginHorizontal();
+        GUILayout.Label("Alert Border Radius", /*EditorStyles.boldLabel,*/ GUILayout.MaxWidth(216));
+        alert_border_radius = GUILayout.TextField(alert_border_radius);
         GUILayout.EndHorizontal();
         GUILayout.Space(5);
 
@@ -448,6 +474,12 @@ public class LoadingScreen : EditorWindow
         GUILayout.BeginHorizontal();
         GUILayout.Label("Alert Button Height", /*EditorStyles.boldLabel,*/ GUILayout.MaxWidth(216));
         alert_button_height = GUILayout.TextField(alert_button_height);
+        GUILayout.EndHorizontal();
+        GUILayout.Space(5);
+
+        GUILayout.BeginHorizontal();
+        GUILayout.Label("Alert Button Border Radius", /*EditorStyles.boldLabel,*/ GUILayout.MaxWidth(216));
+        alert_button_border_radius = GUILayout.TextField(alert_button_border_radius);
         GUILayout.EndHorizontal();
         GUILayout.Space(5);
 
@@ -529,10 +561,23 @@ public class LoadingScreen : EditorWindow
         GUILayout.EndHorizontal();
         GUILayout.Space(5);
 
+
         if (blipparManager.selectedTracking == "Marker Tracking")
         {
             OnInspectorGUI();
         }
+
+        GUILayout.BeginHorizontal();
+        GUILayout.Label("iOS Camera Permission", /*EditorStyles.boldLabel,*/ GUILayout.MaxWidth(216));
+        ios_camera_permission = EditorGUILayout.Toggle("", ios_camera_permission);
+        GUILayout.EndHorizontal();
+        GUILayout.Space(5);
+
+        GUILayout.BeginHorizontal();
+        GUILayout.Label("Auto Scan Instruction On Desktop", /*EditorStyles.boldLabel,*/ GUILayout.MaxWidth(216));
+        auto_scan_instruction_idle_on_desktop = GUILayout.TextField(auto_scan_instruction_idle_on_desktop);
+        GUILayout.EndHorizontal();
+        GUILayout.Space(5);
 
         GUILayout.EndScrollView();
         GUILayout.Space(5);
@@ -882,14 +927,17 @@ public class LoadingScreen : EditorWindow
         dataToSave.progress_ring_scale = progress_ring_scale;
         dataToSave.progress_ring_color = progress_ring_color;
         dataToSave.progress_ring_line_width = progress_ring_line_width;
+        dataToSave.loading_progress_type = loading_progress_type;
 
         dataToSave.alert_border_color = alert_border_color;
         dataToSave.alert_border_width = alert_border_width;
+        dataToSave.alert_border_radius = alert_border_radius;
         dataToSave.alert_background_color = alert_background_color;
         dataToSave.alert_message_text_color = alert_message_text_color;
         dataToSave.alert_button_color = alert_button_color;
         dataToSave.alert_button_text_color = alert_button_text_color;
         dataToSave.alert_button_height = alert_button_height;
+        dataToSave.alert_button_border_radius = alert_button_border_radius;
         dataToSave.alert_box_font_size = alert_box_font_size;
         dataToSave.alert_box_height = alert_box_height;
         dataToSave.alert_box_width = alert_box_width;
@@ -949,6 +997,9 @@ public class LoadingScreen : EditorWindow
         dataToSave.scan_btn_progress_circle_style_fill = scan_btn_progress_circle_style_fill;
         dataToSave.scan_btn_progress_circle_style_stroke = scan_btn_progress_circle_style_stroke;
         dataToSave.scan_btn_progress_circle_style_stroke_width = scan_btn_progress_circle_style_stroke_width;
+
+        dataToSave.ios_camera_permission = ios_camera_permission;
+        dataToSave.auto_scan_instruction_idle_on_desktop = auto_scan_instruction_idle_on_desktop;
 
         dataToSave.showGuideView = showGuideView;
         dataToSave._trackingAnimURL = _trackingAnimURL;

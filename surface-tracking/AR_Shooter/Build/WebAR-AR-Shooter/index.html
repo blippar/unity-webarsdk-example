@@ -8,45 +8,53 @@
     <link rel="shortcut icon" href="TemplateData/favicon.ico">
     <link rel="stylesheet" href="TemplateData/style.css">
     
-<script src = "sdk/blippar-webar-sdk-v1.5.1/webar-sdk/webar-sdk-v1.5.1.min.js?license-key=fca11512-0ec7-4773-85e0-a1d4b56ab49e"
+<script src = "sdk/blippar-webar-sdk-v1.6.3/webar-sdk/webar-sdk-v1.6.3.min.js?license-key=fca11512-0ec7-4773-85e0-a1d4b56ab49e"
 webar-mode="surface-tracking"
 static-camera = "true"
-    auto-start="false"
-    auto-init="false"
+auto-start="false"
+auto-init="false"
+enable-photo-ui="true"
+render-scene-on-desktop="false"
+show-qr-card-on-desktop="false"
+
+enable-tracking-on-desktop= "false"
+enable-mirroring-on-desktop= "false"
 auto-marker-detection ="true"
 show-guide-animation-url=""
-
-    rendering-engine="unity"
-logo-src="images/test_logo_here.png"
-logo-height="116px"
-logo-src="images/test_logo_here.png"
+rendering-engine="unity"
+logo-src="images/blippar_logo.png"
+logo-height="200px"
+logo-width="200px"
+loading-progress-type="default"
 progress-dot-ring-scale="0.30"
-progress-dot-ring-color="#00AAFF"
+progress-dot-ring-color="#F7A400"
 progress-ring-scale="0.36"
-progress-ring-color="#00FFFF"
+progress-ring-color="#F7A400"
 progress-ring-line-width="5"
 
-alert-border-color="#00FFFF"
-alert-border-width="5px"
-alert-background-color="#283747"
-alert-message-text-color="#00AAFF"
-alert-button-color="#00FFFF"
-alert-button-text-color="#283747"
-alert-button-height="50px"
-alert-box-font-size="24px"
-alert-box-height="182px"
-alert-box-width="290px"
-alert-camera-permission-text="We need to ask for access to the camera so this experience can work!!!"
-alert-camera-permission-button-text="No Problem"
-alert-motion-permission-text="Now we need access to motion sensors!!!"
-alert-motion-permission-button-text="No Problem"
+alert-border-color=""
+alert-border-width=""
+alert-border-radius=""
+alert-background-color=""
+alert-message-text-color=""
+alert-button-color=""
+alert-button-text-color=""
+alert-button-height=""
+alert-button-border-radius=""
+alert-box-font-size=""
+alert-box-height=""
+alert-box-width=""
+alert-camera-permission-text=""
+alert-camera-permission-button-text=""
+alert-motion-permission-text=""
+alert-motion-permission-button-text=""
     
-ui-background-color="#283747"
+ui-background-color="#FFFFFF"
 ui-portrait-text="This experience is optimized for portrait display"
-ui-text-color="#00FFFF"
-desktop-logo-src="images/test_desktop_logo.png"
-desktop-logo-width="108px"
-desktop-logo-height="30px"
+ui-text-color="#000000"
+desktop-logo-src="images/blippar_logo.png"
+desktop-logo-width="150px"
+desktop-logo-height="150px"
 issue-img-src="images/test_issue_img.png"
 issue-img-width="116px"
 issue-img-height="116px"
@@ -79,6 +87,8 @@ scan-btn-progress-circle-cx-coordinate="50%"
 scan-btn-progress-circle-cy-coordinate="50%"
 scan-btn-progress-circle-radius="35"
 scan-btn-progress-circle-style="fill: none; stroke: cyan; stroke-width: 6;"
+ios-camera-permission= "false"
+auto-scan-instruction-idle-on-desktop="Reload to detect a marker"
 
 show-guide-view="true"></script>
 
@@ -112,6 +122,14 @@ const stageObjectName = "webarStage";
         container.className = "unity-mobile";
         config.devicePixelRatio = 1;
       }
+      else {
+        // Desktop Unity Container: set the container/canvas for full screen
+        container.style.width = "100%";
+        container.style.height = "100%";
+        // Desktop style: Render the game canvas in a window that can be maximized to fullscreen:
+        canvas.style.width = window.innerWidth + 'px';
+        canvas.style.height = window.innerHeight + 'px';
+      }
 
       const script = document.createElement("script");
       script.src = loaderUrl;
@@ -131,7 +149,7 @@ const stageObjectName = "webarStage";
 		        Yrotvalue=(str);
         }
 
-	    WEBARSDK.InitUnityWebGL(canvas.id, cameraObjectName, stageObjectName);
+    WEBARSDK.InitUnityWebGL(canvas.id, cameraObjectName, stageObjectName, canvas.clientWidth, canvas.clientHeight);
       </script>
   </body>
 </html>

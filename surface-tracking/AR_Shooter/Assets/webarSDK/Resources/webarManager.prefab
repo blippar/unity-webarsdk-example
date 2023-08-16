@@ -10,10 +10,10 @@ GameObject:
   m_Component:
   - component: {fileID: 847742090718678580}
   - component: {fileID: 7612449369011391132}
-  - component: {fileID: 7990738449962110610}
-  - component: {fileID: 7058507275773003635}
-  - component: {fileID: 624830104826028210}
-  - component: {fileID: 4378649151695786112}
+  - component: {fileID: 8992438964596809510}
+  - component: {fileID: 5328570792399182654}
+  - component: {fileID: 8750046328743660898}
+  - component: {fileID: 7404240223274853069}
   m_Layer: 0
   m_Name: webarManager
   m_TagString: Untagged
@@ -48,7 +48,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 84e9ec1317ed7456d95f90f9034b2f6e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &7990738449962110610
+--- !u!114 &8992438964596809510
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -57,7 +57,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 847742090718678571}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 2001070765, guid: 7c205d0cdf8d84f41b03ee88fa829beb, type: 3}
+  m_Script: {fileID: 2001070765, guid: 5e33c9c004abd4171805a0b18b9ad156, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   selectedTracking: 
@@ -69,7 +69,7 @@ MonoBehaviour:
   isStaticCamera: 0
   isSetAutoScale: 0
   trackingAnimURL: 
---- !u!114 &7058507275773003635
+--- !u!114 &5328570792399182654
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -78,12 +78,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 847742090718678571}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 342210306, guid: 7c205d0cdf8d84f41b03ee88fa829beb, type: 3}
+  m_Script: {fileID: 342210306, guid: 5e33c9c004abd4171805a0b18b9ad156, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   markerElements: []
   autoMarkerDetect: 0
---- !u!114 &624830104826028210
+--- !u!114 &8750046328743660898
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -92,7 +92,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 847742090718678571}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 912113408, guid: 7c205d0cdf8d84f41b03ee88fa829beb, type: 3}
+  m_Script: {fileID: 912113408, guid: 5e33c9c004abd4171805a0b18b9ad156, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   enableRotation: 1
@@ -114,7 +114,7 @@ MonoBehaviour:
   OnTrackingStopped:
     m_PersistentCalls:
       m_Calls: []
---- !u!114 &4378649151695786112
+--- !u!114 &7404240223274853069
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -123,7 +123,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 847742090718678571}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 61397546, guid: 7c205d0cdf8d84f41b03ee88fa829beb, type: 3}
+  m_Script: {fileID: 61397546, guid: 5e33c9c004abd4171805a0b18b9ad156, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   gestureObject: {fileID: 0}

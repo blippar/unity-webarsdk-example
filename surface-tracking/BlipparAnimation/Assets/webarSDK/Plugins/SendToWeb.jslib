@@ -38,4 +38,8 @@ StartTrackingParam: function (check) {
   IsMobileBrowser: function () {
     return (/iPhone|iPad|iPod|Android/i.test(navigator.userAgent));
   },
+
+  TakeScreenshot: function (base64String, returnBUffer) {
+    WEBARSDK.TakeUnitySnapShot(UTF8ToString(base64String), returnBUffer);
+  },
 });
