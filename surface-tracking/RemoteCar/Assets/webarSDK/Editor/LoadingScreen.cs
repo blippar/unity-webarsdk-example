@@ -150,7 +150,7 @@ public class LoadingScreen : EditorWindow
         {
             //string fileContents = File.ReadAllText("Assets/webarSDK/Resources/LoadingData.json");
             //loadingData = JsonUtility.FromJson<LoadingData>(fileContents);
-            TextAsset txtAsset = (TextAsset)Resources.Load("LoadingData", typeof(TextAsset));
+            TextAsset txtAsset = (TextAsset)Resources.Load("Data/LoadingData", typeof(TextAsset));
             string tileFile = txtAsset.text;
             loadingData = JsonUtility.FromJson<LoadingData>(tileFile);
         }
@@ -158,7 +158,7 @@ public class LoadingScreen : EditorWindow
 
     public void ReadCustomDataFile()
     {
-        TextAsset txtAsset = (TextAsset)Resources.Load("CustomData", typeof(TextAsset));
+        TextAsset txtAsset = (TextAsset)Resources.Load("Data/CustomData", typeof(TextAsset));
         string tileFile = txtAsset.text;
         customData = JsonUtility.FromJson<CustomData>(tileFile);
     }
@@ -266,11 +266,11 @@ public class LoadingScreen : EditorWindow
 
     private void OnEnable()
     {
-        b_Logo = (Texture2D)Resources.Load("logo", typeof(Texture2D));
+        b_Logo = (Texture2D)Resources.Load("Images/logo", typeof(Texture2D));
         _applicationDataPath = Application.dataPath;
         _buildPath = _applicationDataPath.Replace("Assets", "");
 
-        button_tex = (Texture2D)Resources.Load("Refresh", typeof(Texture2D));
+        button_tex = (Texture2D)Resources.Load("Images/Refresh", typeof(Texture2D));
         button_tex_con = new GUIContent(button_tex);
 
         ReadLoadingDataFile();

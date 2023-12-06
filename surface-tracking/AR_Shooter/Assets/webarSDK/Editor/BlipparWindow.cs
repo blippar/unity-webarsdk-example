@@ -18,9 +18,9 @@ public class BlipparWindow : EditorWindow
     #endregion
 
     #region PrivateField
-    private string sdkPath = "sdk/blippar-webar-sdk-v1.6.3/webar-sdk/webar-sdk-v1.6.3.min.js";
-    private string defaultLicense = "xxxx-1111-2222-3333-yyyy";    private string defaultDomainName = "https://xxxx.yyy";    private string defaultPath = "sdk/blippar-webar-sdk-v1.6.3/webar-sdk/webar-sdk-v1.6.3.min.js";
-    private string saveFile = "Assets/webarSDK/Resources/CustomData.json";
+    private string sdkPath = "sdk/blippar-webar-sdk-v1.7.3/webar-sdk/webar-sdk-v1.7.3.min.js";
+    private string defaultLicense = "xxxx-1111-2222-3333-yyyy";    private string defaultDomainName = "https://xxxx.yyy";    private string defaultPath = "sdk/blippar-webar-sdk-v1.7.3/webar-sdk/webar-sdk-v1.7.3.min.js";
+    private string saveFile = "Assets/webarSDK/Resources/Data/CustomData.json";
 
     private string defaultBuildLocation;
     private string buildLocation;
@@ -35,6 +35,10 @@ public class BlipparWindow : EditorWindow
     private bool showQrOnDesktop = false;
     private bool enableTrackingOnDesktop = false;
     private bool enableMirroringOnDesktop = false;
+    private bool hideResetButton = false;
+    private bool tapAndPlace = true;
+    private UnityEngine.Object webarPlane;
+    private UnityEngine.Object webarCursor;
 
     private int ListSize;
 
@@ -61,13 +65,13 @@ public class BlipparWindow : EditorWindow
     #endregion
 
     #region MenuItems
-    [MenuItem("Blippar/ Settings")]    public static void showLisanceWindow()    {        GetWindow<BlipparWindow>("Blippar");    }    [MenuItem("Blippar/Webar Object/Camera")]    public static void addBlipparCamera()    {         GameObject obj = Instantiate(Resources.Load("webarCamera")) as GameObject;        obj.name = "webarCamera";    }
+    [MenuItem("Blippar/ Settings")]    public static void showLisanceWindow()    {        GetWindow<BlipparWindow>("Blippar");    }    [MenuItem("Blippar/Webar Object/Camera")]    public static void addBlipparCamera()    {         GameObject obj = Instantiate(Resources.Load("Prefabs/webarCamera")) as GameObject;        obj.name = "webarCamera";    }
 
-    [MenuItem("Blippar/Webar Object/Manager")]    public static void addBlipparManager()    {        GameObject obj = Instantiate(Resources.Load("webarManager"), new Vector3(0, 0, 0), new Quaternion(0, 0, 0, 0)) as GameObject;        obj.name = "webarManager";    }
+    [MenuItem("Blippar/Webar Object/Manager")]    public static void addBlipparManager()    {        GameObject obj = Instantiate(Resources.Load("Prefabs/webarManager"), new Vector3(0, 0, 0), new Quaternion(0, 0, 0, 0)) as GameObject;        obj.name = "webarManager";    }
 
-    [MenuItem("Blippar/Webar Object/Stage")]    public static void addBlipparStage()    {        GameObject obj = Instantiate(Resources.Load("webarStage"), new Vector3(0, 0, 0), new Quaternion(0, 0, 0, 0)) as GameObject;        obj.name = "webarStage";    }
+    [MenuItem("Blippar/Webar Object/Stage")]    public static void addBlipparStage()    {        GameObject obj = Instantiate(Resources.Load("Prefabs/webarStage"), new Vector3(0, 0, 0), new Quaternion(0, 0, 0, 0)) as GameObject;        obj.name = "webarStage";    }
 
-    [MenuItem("Blippar/Webar Object/Marker")]    public static void addBlipparMarker()    {        GameObject obj = Instantiate(Resources.Load("webarMarker"), new Vector3(0, 0, 0), new Quaternion(0, 0, 0, 0)) as GameObject;        markerCount = markerCount + 1;        obj.name = "webarMarker" + markerCount;
+    [MenuItem("Blippar/Webar Object/Marker")]    public static void addBlipparMarker()    {        GameObject obj = Instantiate(Resources.Load("Prefabs/webarMarker"), new Vector3(0, 0, 0), new Quaternion(0, 0, 0, 0)) as GameObject;        markerCount = markerCount + 1;        obj.name = "webarMarker" + markerCount;
 
         string fileContents = File.ReadAllText("Assets/webarSDK/Editor/MarkerData/MarkerData.json");        var root = JsonUtility.FromJson<BlipparManager.MarkerMetadata>(fileContents);        obj.GetComponent<MarkerData>().markerDataList.Clear();        obj.GetComponent<MarkerData>().markerDataList.Add("Select Marker");        foreach (var marker in root.markMeta)
         {
@@ -88,7 +92,7 @@ public class BlipparWindow : EditorWindow
     public void WriteFile()
     {
         string jsonString = JsonUtility.ToJson(customData);
-        File.WriteAllText("Assets/webarSDK/Resources/CustomData.json", jsonString);
+        File.WriteAllText("Assets/webarSDK/Resources/Data/CustomData.json", jsonString);
     }
 
     private void CreateFile()
@@ -96,20 +100,20 @@ public class BlipparWindow : EditorWindow
         if (File.Exists(saveFile))
             return;
 
-        saveFile = "Assets/webarSDK/Resources/CustomData.json";
+        saveFile = "Assets/webarSDK/Resources/Data/CustomData.json";
     }
     #endregion
 
     void OnEnable()
     {
-        b_Logo = (Texture2D)Resources.Load("logo", typeof(Texture2D));
+        b_Logo = (Texture2D)Resources.Load("Images/logo", typeof(Texture2D));
         markerCount = 0;
         applicationDataPath = Application.dataPath;
         buildPath = applicationDataPath.Replace("Assets", "");
 
         if (GameObject.Find("webarManager") == null)
         {
-            GameObject obj = Instantiate(Resources.Load("webarManager"), new Vector3(0, 0, 0), new Quaternion(0, 0, 0, 0)) as GameObject;
+            GameObject obj = Instantiate(Resources.Load("Prefabs/webarManager"), new Vector3(0, 0, 0), new Quaternion(0, 0, 0, 0)) as GameObject;
             obj.name = "webarManager";
         }
 
@@ -142,6 +146,14 @@ public class BlipparWindow : EditorWindow
         showQrOnDesktop = customData._showQrCardOnDesktop;
         enableTrackingOnDesktop = customData._enableTrackingOnDesktop;
         enableMirroringOnDesktop = customData._enableMirroringOnDesktop;
+        hideResetButton = customData._hideResetButton;
+        tapAndPlace = customData._isTapAndPlace;
+
+        if (tapAndPlace)
+        {
+            webarPlane = Resources.Load("Data/" + customData._webarPlane);
+            webarCursor = Resources.Load("Data/" + customData._webarCursor);
+        }
 
         projectNameBuild = PlayerSettings.productName;
         defaultBuildLocation = buildPath;
@@ -164,7 +176,11 @@ public class BlipparWindow : EditorWindow
 
         GUILayout.Label(b_Logo, EditorStyles.centeredGreyMiniLabel);
         GUIStyle myStyle = new GUIStyle();
-        GUILayout.Label("v_1.6.3.0", EditorStyles.centeredGreyMiniLabel);
+
+        if (!build)
+        {
+            GUILayout.Label(blipparManager.VersionNumber, EditorStyles.centeredGreyMiniLabel);
+        }
 
         GUILayout.Space(10);
 
@@ -283,6 +299,13 @@ public class BlipparWindow : EditorWindow
         GUILayout.EndHorizontal();
         GUILayout.Space(3);
 
+
+        GUILayout.BeginHorizontal();
+        GUILayout.Label("webar Stage", /*EditorStyles.boldLabel,*/ GUILayout.MaxWidth(175));
+        myStage = EditorGUILayout.ObjectField(myStage, typeof(GameObject), true);
+        GUILayout.EndHorizontal();
+        GUILayout.Space(5);
+
         GUILayout.BeginHorizontal();
         GUILayout.Label("Auto Init", /*EditorStyles.boldLabel,*/ GUILayout.MaxWidth(175));
         autoInit = EditorGUILayout.Toggle("", autoInit);
@@ -306,7 +329,6 @@ public class BlipparWindow : EditorWindow
         staticCamera = EditorGUILayout.Toggle("", staticCamera);
         customData._isStaticCamera = staticCamera;
         WriteFile();
-        blipparManager.isStaticCamera = staticCamera;
         GUILayout.EndHorizontal();
         GUILayout.Space(3);
 
@@ -342,13 +364,49 @@ public class BlipparWindow : EditorWindow
         GUILayout.EndHorizontal();
         GUILayout.Space(3);
 
-        SetDefaults();
+        GUILayout.BeginHorizontal();
+        GUILayout.Label("Hide Reset Button", /*EditorStyles.boldLabel,*/ GUILayout.MaxWidth(175));
+        hideResetButton = EditorGUILayout.Toggle("", hideResetButton);
+        customData._hideResetButton = hideResetButton;
+        WriteFile();
+        GUILayout.EndHorizontal();
+        GUILayout.Space(3);
 
         GUILayout.BeginHorizontal();
-        GUILayout.Label("webar Stage", /*EditorStyles.boldLabel,*/ GUILayout.MaxWidth(175));
-        myStage = EditorGUILayout.ObjectField(myStage, typeof(GameObject), true);
+        GUILayout.Label("Tap And Place", /*EditorStyles.boldLabel,*/ GUILayout.MaxWidth(175));
+        tapAndPlace = EditorGUILayout.Toggle("", tapAndPlace);
+        customData._isTapAndPlace = tapAndPlace;
+        WriteFile();
         GUILayout.EndHorizontal();
-        GUILayout.Space(10);
+        GUILayout.Space(3);
+
+        if (tapAndPlace)
+        {
+            //webarPlane = Resources.Load("webarPlane");
+            //webarCursor = Resources.Load("webarCursor");
+
+            GUILayout.BeginHorizontal();
+            GUILayout.Label("webar plane", /*EditorStyles.boldLabel,*/ GUILayout.MaxWidth(175));
+            webarPlane = EditorGUILayout.ObjectField(webarPlane, typeof(GameObject), true);
+            GUILayout.EndHorizontal();
+            GUILayout.Space(3);
+
+            GUILayout.BeginHorizontal();
+            GUILayout.Label("webar Cursor", /*EditorStyles.boldLabel,*/ GUILayout.MaxWidth(175));
+            webarCursor = EditorGUILayout.ObjectField(webarCursor, typeof(GameObject), true);
+            GUILayout.EndHorizontal();
+            GUILayout.Space(10);
+            if (webarPlane != null)
+                customData._webarPlane = webarPlane.name;
+            else
+                customData._webarPlane = "";
+            if (webarCursor != null)
+                customData._webarCursor = webarCursor.name;
+            else
+                customData._webarCursor = "";
+            WriteFile();
+        }
+
         SetDefaults();
     }
 
@@ -361,7 +419,7 @@ public class BlipparWindow : EditorWindow
         GUILayout.Label("webar Camera", EditorStyles.boldLabel, GUILayout.MaxWidth(175));
         myCamera = EditorGUILayout.ObjectField(myCamera, typeof(Camera), true);
         GUILayout.EndHorizontal();
-        GUILayout.Space(5);
+        GUILayout.Space(2);
 
         GUILayout.BeginHorizontal();
         GUILayout.Label("Auto Init", /*EditorStyles.boldLabel,*/ GUILayout.MaxWidth(175));
@@ -370,7 +428,7 @@ public class BlipparWindow : EditorWindow
         WriteFile();
         blipparManager.autoInit = autoInit;
         GUILayout.EndHorizontal();
-        GUILayout.Space(3);
+        GUILayout.Space(2);
 
         GUILayout.BeginHorizontal();
         GUILayout.Label("Auto Start", /*EditorStyles.boldLabel,*/ GUILayout.MaxWidth(175));
@@ -379,16 +437,15 @@ public class BlipparWindow : EditorWindow
         WriteFile();
         blipparManager.autoStart = autoStart;
         GUILayout.EndHorizontal();
-        GUILayout.Space(5);
+        GUILayout.Space(2);
 
         GUILayout.BeginHorizontal();
         GUILayout.Label("Static Camera", /*EditorStyles.boldLabel,*/ GUILayout.MaxWidth(175));
         staticCamera = EditorGUILayout.Toggle("", staticCamera);
         customData._isStaticCamera = staticCamera;
         WriteFile();
-        blipparManager.isStaticCamera = staticCamera;
         GUILayout.EndHorizontal();
-        GUILayout.Space(5);
+        GUILayout.Space(2);
 
         GUILayout.BeginHorizontal();
         GUILayout.Label("Set auto scale", /*EditorStyles.boldLabel,*/ GUILayout.MaxWidth(175));
@@ -396,7 +453,7 @@ public class BlipparWindow : EditorWindow
         customData._setAutoScale = setAutoScale;
         WriteFile();
         GUILayout.EndHorizontal();
-        GUILayout.Space(5);
+        GUILayout.Space(2);
 
         GUILayout.BeginHorizontal();
         GUILayout.Label("Enable Photo UI", /*EditorStyles.boldLabel,*/ GUILayout.MaxWidth(175));
@@ -404,14 +461,14 @@ public class BlipparWindow : EditorWindow
         customData._enablePhotoUI = enablePhotoUI;
         WriteFile();
         GUILayout.EndHorizontal();
-        GUILayout.Space(5);
+        GUILayout.Space(2);
 
         GUILayout.BeginHorizontal();
         GUILayout.Label("Auto Marker Detection", /*EditorStyles.boldLabel,*/ GUILayout.MaxWidth(175));
         autoMrkrdetection = EditorGUILayout.Toggle("", autoMrkrdetection);
         blipparManager.automarkerdetect = autoMrkrdetection;
         GUILayout.EndHorizontal();
-        GUILayout.Space(5);
+        GUILayout.Space(2);
 
         //GUILayout.BeginHorizontal();
         //renderSceneOnDesktop = EditorGUILayout.Toggle("Render Scene On Desktop", renderSceneOnDesktop);
@@ -427,7 +484,7 @@ public class BlipparWindow : EditorWindow
         customData._enableTrackingOnDesktop = enableTrackingOnDesktop;
         WriteFile();
         GUILayout.EndHorizontal();
-        GUILayout.Space(3);
+        GUILayout.Space(2);
 
         GUILayout.BeginHorizontal();
         GUILayout.Label("Enable Mirroring On Desktop", /*EditorStyles.boldLabel,*/ GUILayout.MaxWidth(175));
@@ -435,7 +492,15 @@ public class BlipparWindow : EditorWindow
         customData._enableMirroringOnDesktop = enableMirroringOnDesktop;
         WriteFile();
         GUILayout.EndHorizontal();
-        GUILayout.Space(3);
+        GUILayout.Space(2);
+
+        //GUILayout.BeginHorizontal();
+        //GUILayout.Label("Hide Reset Button", /*EditorStyles.boldLabel,*/ GUILayout.MaxWidth(175));
+        //hideResetButton = EditorGUILayout.Toggle("", hideResetButton);
+        //customData._hideResetButton = hideResetButton;
+        //WriteFile();
+        //GUILayout.EndHorizontal();
+        //GUILayout.Space(2);
 
         GUILayout.BeginHorizontal();
         GUILayout.Label("Show QR Card On Desktop", /*EditorStyles.boldLabel,*/ GUILayout.MaxWidth(175));
@@ -443,7 +508,7 @@ public class BlipparWindow : EditorWindow
         customData._showQrCardOnDesktop = showQrOnDesktop;
         WriteFile();
         GUILayout.EndHorizontal();
-        GUILayout.Space(3);
+        GUILayout.Space(2);
 
         SetDefaults();
 
@@ -496,7 +561,7 @@ public class BlipparWindow : EditorWindow
         }
 
         GUILayout.EndHorizontal();
-        GUILayout.Space(10);
+        GUILayout.Space(5);
 
         scrollPosition = GUILayout.BeginScrollView(scrollPosition, false, true);
 
@@ -536,7 +601,7 @@ public class BlipparWindow : EditorWindow
         //Adding Camera
         if (GameObject.Find("webarCamera") == null)
         {
-            GameObject obj = Instantiate(Resources.Load("webarCamera")) as GameObject;
+            GameObject obj = Instantiate(Resources.Load("Prefabs/webarCamera")) as GameObject;
             obj.name = "webarCamera";
         }
 
@@ -549,7 +614,7 @@ public class BlipparWindow : EditorWindow
         {
             if (GameObject.Find("webarStage") == null)
             {
-                GameObject obj = Instantiate(Resources.Load("webarStage"), new Vector3(0, 0, 0), new Quaternion(0, 0, 0, 0)) as GameObject;
+                GameObject obj = Instantiate(Resources.Load("Prefabs/webarStage"), new Vector3(0, 0, 0), new Quaternion(0, 0, 0, 0)) as GameObject;
                 obj.name = "webarStage";
             }
 
@@ -563,7 +628,7 @@ public class BlipparWindow : EditorWindow
         {
             //if (GameObject.FindGameObjectWithTag("Marker") == null)
             //{
-            //    GameObject obj = Instantiate(Resources.Load("webarMarker"), new Vector3(0, 0, 0), new Quaternion(0, 0, 0, 0)) as GameObject;
+            //    GameObject obj = Instantiate(Resources.Load("Prefabs/webarMarker"), new Vector3(0, 0, 0), new Quaternion(0, 0, 0, 0)) as GameObject;
             //    obj.name = "webarMarker1";
 
             //    //if (GameObject.FindGameObjectsWithTag("Marker") != null)
@@ -577,7 +642,7 @@ public class BlipparWindow : EditorWindow
             //    //}
             //}
         }
-   
+
     }
 
     static string GetScenes()
@@ -588,7 +653,7 @@ public class BlipparWindow : EditorWindow
 
     void BuildBlippar()
     {
-        
+        blipparManager.VersionNumber = customData._versionNumber;
         GUILayout.BeginHorizontal();
         if (GUILayout.Button("Build Scene"))
         {
@@ -604,7 +669,19 @@ public class BlipparWindow : EditorWindow
             if (options.GetValue(index).ToString() == "Surface Tracking")
             {
                 blipparManager.selectedTracking = "Surface Tracking";
-                blipparManager.ReadString(true, sdkPath, LicenseKey, myCamera.name, myStage.name, enablePhotoUI ,renderSceneOnDesktop, showQrOnDesktop);
+                blipparManager.ReadString(true, sdkPath, LicenseKey, myCamera.name, myStage.name, enablePhotoUI ,renderSceneOnDesktop, showQrOnDesktop, hideResetButton);
+                if (tapAndPlace)
+                {
+                    customData._webarPlane = webarPlane.name;
+                    customData._webarCursor = webarCursor.name;
+                    WriteFile();
+                }
+                else
+                {
+                    customData._webarPlane = "";
+                    customData._webarCursor = "";
+                    WriteFile();
+                }
             }
             else if (options.GetValue(index).ToString() == "Marker Tracking")
             {
@@ -615,7 +692,7 @@ public class BlipparWindow : EditorWindow
                     MarkerData marker = markers[i];
                     marker.enabled = false;
                 }
-                blipparManager.ReadMarkers(true, sdkPath, LicenseKey, myCamera.name, enablePhotoUI, _simulatorList, enableTrackingOnDesktop, enableMirroringOnDesktop, showQrOnDesktop);
+                blipparManager.ReadMarkers(true, sdkPath, LicenseKey, myCamera.name, enablePhotoUI, _simulatorList, enableTrackingOnDesktop, enableMirroringOnDesktop, showQrOnDesktop, hideResetButton);
             }
             Debug.Log("### BUILDING ###");
             PlayerSettings.WebGL.decompressionFallback = true;
@@ -704,17 +781,17 @@ public class BlipparWindow : EditorWindow
         }
         if (myCamera == null)
         {
-            EditorUtility.DisplayDialog("Warning", "Please assign wearCamera in inspector window", "ok");
+            EditorUtility.DisplayDialog("Warning", "Please assign wearCamera in Blippar window", "ok");
             return false;
         }
         if (myStage == null && options.GetValue(index).ToString() == "Surface Tracking")
         {
-            EditorUtility.DisplayDialog("Warning", "Please assign webarStage in inspector window", "ok");
+            EditorUtility.DisplayDialog("Warning", "Please assign webarStage in Blippar window", "ok");
             return false;
         }
         if (FindObjectOfType<BlipparManager>() == null)
         {
-            EditorUtility.DisplayDialog("Warning", "Please add webarManager object from Blipper menu", "ok");
+            EditorUtility.DisplayDialog("Warning", "Please add webarManager object from Blippar menu", "ok");
             return false;
         }
         if (FindObjectOfType<WEBARSDK>() == null)
@@ -731,7 +808,7 @@ public class BlipparWindow : EditorWindow
 
         if (buildLocation == "" )
         {
-            EditorUtility.DisplayDialog("Warning", "Please provide build location in inspector window", "ok");
+            EditorUtility.DisplayDialog("Warning", "Please provide build location in Blippar window", "ok");
             return false;
         }
 
@@ -742,10 +819,22 @@ public class BlipparWindow : EditorWindow
                 Markers mark = _simulatorList.markerElements[i];
                 if (mark.markerID =="")
                 {
-                    EditorUtility.DisplayDialog("Warning", "Please enter marker id in inspector window", "ok");
+                    EditorUtility.DisplayDialog("Warning", "Please enter marker id in Blippar window", "ok");
                     return false;
                 }
             }
+        }
+
+        if (tapAndPlace && webarPlane == null && options.GetValue(index).ToString() == "Surface Tracking")
+        {
+            EditorUtility.DisplayDialog("Warning", "Please assign webar Plane object in Blippar window", "ok");
+            return false;
+        }
+
+        if (tapAndPlace && webarCursor == null && options.GetValue(index).ToString() == "Surface Tracking")
+        {
+            EditorUtility.DisplayDialog("Warning", "Please assign webar cursor object in Blippar window", "ok");
+            return false;
         }
         //if (GetScenes().Length == 0)
         //{

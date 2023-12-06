@@ -36,10 +36,19 @@ StartTrackingParam: function (check) {
   },
 
   IsMobileBrowser: function () {
-    return (/iPhone|iPad|iPod|Android/i.test(navigator.userAgent));
+   // return (/iPhone|iPad|iPod|Android/i.test(navigator.userAgent));
+      return Module.SystemInfo.mobile;
   },
 
   TakeScreenshot: function (base64String, returnBUffer) {
     WEBARSDK.TakeUnitySnapShot(UTF8ToString(base64String), returnBUffer);
+  },
+
+  SetButtonVisibility: function (state) {
+    WEBARSDK.SetButtonVisibility(UTF8ToString(state));
+  },
+
+  SetEnablePhotoUIVisibility:  function (trackingState, state) {
+    WEBARSDK.EnablePhotoUIVisibility(trackingState, UTF8ToString(state));
   },
 });

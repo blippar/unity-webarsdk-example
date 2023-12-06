@@ -40,4 +40,11 @@ public class Car : MonoBehaviour
     {
         transform.Rotate(Vector3.up, rate * turnSpeed * Time.deltaTime);
     }
+    public void OnTrackingReset()
+    {
+        transform.position = new Vector3(0, 0, 0);
+        transform.Rotate(0, 90, 0);
+    }
+
+
 }
