@@ -1896,6 +1896,155 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 681764486}
   m_CullTransparentMesh: 0
+--- !u!1 &828683595
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 828683601}
+  - component: {fileID: 828683600}
+  - component: {fileID: 828683599}
+  - component: {fileID: 828683598}
+  - component: {fileID: 828683597}
+  - component: {fileID: 828683596}
+  m_Layer: 0
+  m_Name: webarManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &828683596
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 828683595}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 61397546, guid: 80409edf8ff1a4e60ad349e18a5871a0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gestureObject: {fileID: 0}
+  cameraObject: {fileID: 0}
+  isCamera: 0
+  isAutoScale: 0
+--- !u!114 &828683597
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 828683595}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 912113408, guid: 80409edf8ff1a4e60ad349e18a5871a0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  enableRotation: 1
+  rotationFactor: 1
+  enableXRotation: 1
+  enableYRotation: 0
+  enableZoom: 1
+  zoomFactor: 1
+  zoomLimitMax: 2
+  zoomLimitMin: 0.5
+  OnTargetFound:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 282663881}
+        m_TargetAssemblyTypeName: ShooterCore, Assembly-CSharp
+        m_MethodName: TargetFound
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  OnTargetLost:
+    m_PersistentCalls:
+      m_Calls: []
+  OnTrackingStarted:
+    m_PersistentCalls:
+      m_Calls: []
+  OnTrackingStopped:
+    m_PersistentCalls:
+      m_Calls: []
+  OnARModelPlaced:
+    m_PersistentCalls:
+      m_Calls: []
+  OnResetClick:
+    m_PersistentCalls:
+      m_Calls: []
+--- !u!114 &828683598
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 828683595}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 342210306, guid: 80409edf8ff1a4e60ad349e18a5871a0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  markerElements: []
+  autoMarkerDetect: 0
+--- !u!114 &828683599
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 828683595}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 2001070765, guid: 80409edf8ff1a4e60ad349e18a5871a0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  selectedTracking: Surface Tracking
+  automarkerdetect: 0
+  selectedTemplpate: 
+  animURL: 
+  autoInit: 1
+  autoStart: 1
+  isStaticCamera: 0
+  isSetAutoScale: 0
+  trackingAnimURL: 
+--- !u!114 &828683600
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 828683595}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 84e9ec1317ed7456d95f90f9034b2f6e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!4 &828683601
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 828683595}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &911403404
 GameObject:
   m_ObjectHideFlags: 0
@@ -2629,149 +2778,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1411299678}
   m_CullTransparentMesh: 0
---- !u!1 &1516266601
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1516266607}
-  - component: {fileID: 1516266606}
-  - component: {fileID: 1516266605}
-  - component: {fileID: 1516266604}
-  - component: {fileID: 1516266603}
-  - component: {fileID: 1516266602}
-  m_Layer: 0
-  m_Name: webarManager
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &1516266602
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1516266601}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 61397546, guid: 5e33c9c004abd4171805a0b18b9ad156, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  gestureObject: {fileID: 0}
-  cameraObject: {fileID: 0}
-  isCamera: 0
-  stageRotYValue: 0
-  stageQuat: {fileID: 0}
---- !u!114 &1516266603
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1516266601}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 912113408, guid: 5e33c9c004abd4171805a0b18b9ad156, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  enableRotation: 1
-  rotationSpeed: 1
-  enableXRotation: 1
-  enableYRotation: 0
-  enableZoom: 1
-  zoomSpeed: 1
-  zoomLimit: 2
-  OnTargetFound:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 282663881}
-        m_TargetAssemblyTypeName: ShooterCore, Assembly-CSharp
-        m_MethodName: TargetFound
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-  OnTargetLost:
-    m_PersistentCalls:
-      m_Calls: []
-  OnTrackingStarted:
-    m_PersistentCalls:
-      m_Calls: []
-  OnTrackingStopped:
-    m_PersistentCalls:
-      m_Calls: []
---- !u!114 &1516266604
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1516266601}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 342210306, guid: 5e33c9c004abd4171805a0b18b9ad156, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  markerElements: []
-  autoMarkerDetect: 0
---- !u!114 &1516266605
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1516266601}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 2001070765, guid: 5e33c9c004abd4171805a0b18b9ad156, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  selectedTracking: Surface Tracking
-  automarkerdetect: 0
-  selectedTemplpate: 
-  animURL: 
-  autoInit: 1
-  autoStart: 1
-  isStaticCamera: 1
-  isSetAutoScale: 0
-  trackingAnimURL: 
---- !u!114 &1516266606
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1516266601}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 84e9ec1317ed7456d95f90f9034b2f6e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!4 &1516266607
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1516266601}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 4
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1538278730
 GameObject:
   m_ObjectHideFlags: 0

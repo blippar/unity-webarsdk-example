@@ -123,6 +123,143 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &185625877
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 185625883}
+  - component: {fileID: 185625882}
+  - component: {fileID: 185625881}
+  - component: {fileID: 185625880}
+  - component: {fileID: 185625879}
+  - component: {fileID: 185625878}
+  m_Layer: 0
+  m_Name: webarManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &185625878
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 185625877}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 61397546, guid: 80409edf8ff1a4e60ad349e18a5871a0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gestureObject: {fileID: 0}
+  cameraObject: {fileID: 0}
+  isCamera: 0
+  isAutoScale: 0
+--- !u!114 &185625879
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 185625877}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 912113408, guid: 80409edf8ff1a4e60ad349e18a5871a0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  enableRotation: 1
+  rotationFactor: 1
+  enableXRotation: 1
+  enableYRotation: 0
+  enableZoom: 1
+  zoomFactor: 1
+  zoomLimitMax: 2
+  zoomLimitMin: 0.5
+  OnTargetFound:
+    m_PersistentCalls:
+      m_Calls: []
+  OnTargetLost:
+    m_PersistentCalls:
+      m_Calls: []
+  OnTrackingStarted:
+    m_PersistentCalls:
+      m_Calls: []
+  OnTrackingStopped:
+    m_PersistentCalls:
+      m_Calls: []
+  OnARModelPlaced:
+    m_PersistentCalls:
+      m_Calls: []
+  OnResetClick:
+    m_PersistentCalls:
+      m_Calls: []
+--- !u!114 &185625880
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 185625877}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 342210306, guid: 80409edf8ff1a4e60ad349e18a5871a0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  markerElements: []
+  autoMarkerDetect: 0
+--- !u!114 &185625881
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 185625877}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 2001070765, guid: 80409edf8ff1a4e60ad349e18a5871a0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  selectedTracking: Surface Tracking
+  automarkerdetect: 0
+  selectedTemplpate: 
+  animURL: 
+  autoInit: 1
+  autoStart: 1
+  isStaticCamera: 0
+  isSetAutoScale: 0
+  trackingAnimURL: 
+--- !u!114 &185625882
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 185625877}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 84e9ec1317ed7456d95f90f9034b2f6e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!4 &185625883
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 185625877}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &482716502
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -466,139 +603,8 @@ Transform:
   m_Children:
   - {fileID: 1616076477}
   m_Father: {fileID: 0}
-  m_RootOrder: 3
-  m_LocalEulerAnglesHint: {x: 0, y: 2, z: 0}
---- !u!1 &1497754357
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1497754363}
-  - component: {fileID: 1497754362}
-  - component: {fileID: 1497754361}
-  - component: {fileID: 1497754360}
-  - component: {fileID: 1497754359}
-  - component: {fileID: 1497754358}
-  m_Layer: 0
-  m_Name: webarManager
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &1497754358
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1497754357}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 61397546, guid: 5e33c9c004abd4171805a0b18b9ad156, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  gestureObject: {fileID: 0}
-  cameraObject: {fileID: 0}
-  isCamera: 0
-  stageRotYValue: 0
-  stageQuat: {fileID: 0}
---- !u!114 &1497754359
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1497754357}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 912113408, guid: 5e33c9c004abd4171805a0b18b9ad156, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  enableRotation: 1
-  rotationSpeed: 1
-  enableXRotation: 1
-  enableYRotation: 0
-  enableZoom: 1
-  zoomSpeed: 1
-  zoomLimit: 2
-  OnTargetFound:
-    m_PersistentCalls:
-      m_Calls: []
-  OnTargetLost:
-    m_PersistentCalls:
-      m_Calls: []
-  OnTrackingStarted:
-    m_PersistentCalls:
-      m_Calls: []
-  OnTrackingStopped:
-    m_PersistentCalls:
-      m_Calls: []
---- !u!114 &1497754360
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1497754357}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 342210306, guid: 5e33c9c004abd4171805a0b18b9ad156, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  markerElements: []
-  autoMarkerDetect: 0
---- !u!114 &1497754361
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1497754357}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 2001070765, guid: 5e33c9c004abd4171805a0b18b9ad156, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  selectedTracking: Surface Tracking
-  automarkerdetect: 0
-  selectedTemplpate: 
-  animURL: 
-  autoInit: 1
-  autoStart: 1
-  isStaticCamera: 1
-  isSetAutoScale: 0
-  trackingAnimURL: 
---- !u!114 &1497754362
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1497754357}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 84e9ec1317ed7456d95f90f9034b2f6e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!4 &1497754363
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1497754357}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
   m_RootOrder: 2
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 2, z: 0}
 --- !u!850595691 &1580444959
 LightingSettings:
   m_ObjectHideFlags: 0

@@ -123,7 +123,7 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
---- !u!1 &73435574
+--- !u!1 &82578020
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -131,12 +131,12 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 73435580}
-  - component: {fileID: 73435579}
-  - component: {fileID: 73435578}
-  - component: {fileID: 73435577}
-  - component: {fileID: 73435576}
-  - component: {fileID: 73435575}
+  - component: {fileID: 82578026}
+  - component: {fileID: 82578025}
+  - component: {fileID: 82578024}
+  - component: {fileID: 82578023}
+  - component: {fileID: 82578022}
+  - component: {fileID: 82578021}
   m_Layer: 0
   m_Name: webarManager
   m_TagString: Untagged
@@ -144,42 +144,42 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &73435575
+--- !u!114 &82578021
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 73435574}
+  m_GameObject: {fileID: 82578020}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 61397546, guid: 5e33c9c004abd4171805a0b18b9ad156, type: 3}
+  m_Script: {fileID: 61397546, guid: 80409edf8ff1a4e60ad349e18a5871a0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   gestureObject: {fileID: 0}
   cameraObject: {fileID: 0}
   isCamera: 0
-  stageRotYValue: 0
-  stageQuat: {fileID: 0}
---- !u!114 &73435576
+  isAutoScale: 0
+--- !u!114 &82578022
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 73435574}
+  m_GameObject: {fileID: 82578020}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 912113408, guid: 5e33c9c004abd4171805a0b18b9ad156, type: 3}
+  m_Script: {fileID: 912113408, guid: 80409edf8ff1a4e60ad349e18a5871a0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   enableRotation: 1
-  rotationSpeed: 1
+  rotationFactor: 1
   enableXRotation: 1
   enableYRotation: 0
   enableZoom: 1
-  zoomSpeed: 1
-  zoomLimit: 2
+  zoomFactor: 1
+  zoomLimitMax: 2
+  zoomLimitMin: 0.5
   OnTargetFound:
     m_PersistentCalls:
       m_Calls: []
@@ -192,30 +192,36 @@ MonoBehaviour:
   OnTrackingStopped:
     m_PersistentCalls:
       m_Calls: []
---- !u!114 &73435577
+  OnARModelPlaced:
+    m_PersistentCalls:
+      m_Calls: []
+  OnResetClick:
+    m_PersistentCalls:
+      m_Calls: []
+--- !u!114 &82578023
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 73435574}
+  m_GameObject: {fileID: 82578020}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 342210306, guid: 5e33c9c004abd4171805a0b18b9ad156, type: 3}
+  m_Script: {fileID: 342210306, guid: 80409edf8ff1a4e60ad349e18a5871a0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   markerElements: []
   autoMarkerDetect: 0
---- !u!114 &73435578
+--- !u!114 &82578024
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 73435574}
+  m_GameObject: {fileID: 82578020}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 2001070765, guid: 5e33c9c004abd4171805a0b18b9ad156, type: 3}
+  m_Script: {fileID: 2001070765, guid: 80409edf8ff1a4e60ad349e18a5871a0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   selectedTracking: Surface Tracking
@@ -224,35 +230,35 @@ MonoBehaviour:
   animURL: 
   autoInit: 1
   autoStart: 1
-  isStaticCamera: 1
+  isStaticCamera: 0
   isSetAutoScale: 0
   trackingAnimURL: 
---- !u!114 &73435579
+--- !u!114 &82578025
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 73435574}
+  m_GameObject: {fileID: 82578020}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 84e9ec1317ed7456d95f90f9034b2f6e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!4 &73435580
+--- !u!4 &82578026
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 73435574}
+  m_GameObject: {fileID: 82578020}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &100751195
 GameObject:
@@ -316,7 +322,7 @@ Transform:
   m_Children:
   - {fileID: 100751196}
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 2, z: 0}
 --- !u!1 &705507993
 GameObject:
